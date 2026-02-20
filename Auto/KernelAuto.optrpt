@@ -1,0 +1,763 @@
+Begin optimization report for: leer_pgm(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, std::vector<float, std::allocator<float>>&, int&, int&)
+
+LOOP BEGIN at KernelAuto.cpp (34, 5)
+LOOP END
+
+LOOP BEGIN at KernelAuto.cpp (45, 9)
+LOOP END
+
+LOOP BEGIN at KernelAuto.cpp (55, 9)
+    remark #15521: Loop was not vectorized: loop control variable was not identified. Explicitly compute the iteration count before executing the loop or try using canonical loop form from OpenMP specification
+LOOP END
+=================================================================
+
+Begin optimization report for: std::basic_ifstream<char, std::char_traits<char>>::basic_ifstream(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, std::_Ios_Openmode)
+=================================================================
+
+Begin optimization report for: std::basic_ifstream<char, std::char_traits<char>>::is_open()
+=================================================================
+
+Begin optimization report for: std::basic_ostream<char, std::char_traits<char>>& std::operator<<<char, std::char_traits<char>, std::allocator<char>>(std::basic_ostream<char, std::char_traits<char>>&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&)
+=================================================================
+
+Begin optimization report for: std::basic_ostream<char, std::char_traits<char>>& std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&, char const*)
+=================================================================
+
+Begin optimization report for: std::ostream::operator<<(std::ostream& (*)(std::ostream&))
+=================================================================
+
+Begin optimization report for: std::basic_ostream<char, std::char_traits<char>>& std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&)
+=================================================================
+
+Begin optimization report for: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string()
+=================================================================
+
+Begin optimization report for: bool std::operator!=<char, std::char_traits<char>, std::allocator<char>>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, char const*)
+=================================================================
+
+Begin optimization report for: std::istream::operator>>(std::istream& (*)(std::istream&))
+=================================================================
+
+Begin optimization report for: std::basic_ios<char, std::char_traits<char>>::operator bool() const
+=================================================================
+
+Begin optimization report for: std::basic_istream<char, std::char_traits<char>>& std::getline<char, std::char_traits<char>, std::allocator<char>>(std::basic_istream<char, std::char_traits<char>>&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>&)
+=================================================================
+
+Begin optimization report for: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::~basic_string()
+=================================================================
+
+Begin optimization report for: std::vector<float, std::allocator<float>>::resize(unsigned long)
+=================================================================
+
+Begin optimization report for: bool std::operator==<char, std::char_traits<char>, std::allocator<char>>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, char const*)
+=================================================================
+
+Begin optimization report for: std::vector<float, std::allocator<float>>::operator[](unsigned long)
+=================================================================
+
+Begin optimization report for: std::allocator<unsigned char>::allocator()
+=================================================================
+
+Begin optimization report for: std::vector<unsigned char, std::allocator<unsigned char>>::vector(unsigned long, std::allocator<unsigned char> const&)
+=================================================================
+
+Begin optimization report for: std::vector<unsigned char, std::allocator<unsigned char>>::data()
+=================================================================
+
+Begin optimization report for: std::vector<unsigned char, std::allocator<unsigned char>>::operator[](unsigned long)
+=================================================================
+
+Begin optimization report for: std::vector<unsigned char, std::allocator<unsigned char>>::~vector()
+=================================================================
+
+Begin optimization report for: std::basic_ifstream<char, std::char_traits<char>>::close()
+=================================================================
+
+Begin optimization report for: std::basic_ifstream<char, std::char_traits<char>>::~basic_ifstream()
+=================================================================
+
+Begin optimization report for: escribir_pgm(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, float*, int, int)
+
+LOOP BEGIN at KernelAuto.cpp (71, 5)
+LOOP END
+=================================================================
+
+Begin optimization report for: std::basic_ofstream<char, std::char_traits<char>>::basic_ofstream(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, std::_Ios_Openmode)
+=================================================================
+
+Begin optimization report for: std::basic_ofstream<char, std::char_traits<char>>::is_open()
+=================================================================
+
+Begin optimization report for: float const& std::min<float>(float const&, float const&)
+=================================================================
+
+Begin optimization report for: std::basic_ofstream<char, std::char_traits<char>>::close()
+=================================================================
+
+Begin optimization report for: std::basic_ofstream<char, std::char_traits<char>>::~basic_ofstream()
+=================================================================
+
+Begin optimization report for: calcular_gradientes_sobel(std::vector<float, std::allocator<float>> const&, float*, float*, int, int)
+
+LOOP BEGIN at KernelAuto.cpp (84, 5)
+<Predicate Optimized v1>
+
+    LOOP BEGIN at KernelAuto.cpp (85, 9)
+
+        LOOP BEGIN at KernelAuto.cpp (87, 13)
+
+            LOOP BEGIN at KernelAuto.cpp (88, 17)
+            LOOP END
+        LOOP END
+    LOOP END
+LOOP END
+
+LOOP BEGIN at KernelAuto.cpp (84, 5)
+<Predicate Optimized v2>
+    remark #15541: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+    LOOP BEGIN at KernelAuto.cpp (85, 9)
+        remark #15344: Loop was not vectorized: vector dependence prevents vectorization
+        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (89, 35) ] and img 
+        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (89, 35) ] and img 
+        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (89, 35) ] and img 
+        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (89, 35) ] and img 
+        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (89, 35) ] and img 
+        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (89, 35) ] and img 
+        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (89, 35) ] and img 
+        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (89, 35) ] and img 
+        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (89, 35) ] and img 
+        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (89, 35) ] and img 
+
+        LOOP BEGIN at KernelAuto.cpp (87, 13)
+
+            LOOP BEGIN at KernelAuto.cpp (88, 17)
+            LOOP END
+        LOOP END
+    LOOP END
+LOOP END
+=================================================================
+
+Begin optimization report for: std::vector<float, std::allocator<float>>::operator[](unsigned long) const
+=================================================================
+
+Begin optimization report for: sobel_auto(float const*, float const*, float*, int)
+
+LOOP BEGIN at KernelAuto.cpp (104, 5)
+    remark #15300: LOOP WAS VECTORIZED
+    remark #15305: vectorization support: vector length 16
+    remark #15389: vectorization support: unmasked unaligned unit stride load: Gx [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (105, 24) ] 
+    remark #15389: vectorization support: unmasked unaligned unit stride load: Gy [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (105, 40) ] 
+    remark #15389: vectorization support: unmasked unaligned unit stride store: Mag [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (105, 9) ] 
+    remark #15475: --- begin vector loop cost summary ---
+    remark #15476: scalar cost: 15.000000 
+    remark #15477: vector cost: 3.859375 
+    remark #15478: estimated potential speedup: 3.703125 
+    remark #15309: vectorization support: normalized vectorization overhead 1.281250
+    remark #15591: vectorized intrinsic functions: 1
+    remark #15488: --- end vector loop cost summary ---
+    remark #15447: --- begin vector loop memory reference summary ---
+    remark #15450: unmasked unaligned unit stride loads: 2 
+    remark #15451: unmasked unaligned unit stride stores: 1 
+    remark #15474: --- end vector loop memory reference summary ---
+LOOP END
+
+LOOP BEGIN at KernelAuto.cpp (104, 5)
+<Remainder loop for vectorization>
+    remark #15439: remainder loop was vectorized (unmasked)
+    remark #15305: vectorization support: vector length 4
+    remark #15389: vectorization support: unmasked unaligned unit stride load: Gx [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (105, 24) ] 
+    remark #15389: vectorization support: unmasked unaligned unit stride load: Gy [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (105, 40) ] 
+    remark #15389: vectorization support: unmasked unaligned unit stride store: Mag [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (105, 9) ] 
+    remark #15475: --- begin vector loop cost summary ---
+    remark #15591: vectorized intrinsic functions: 1
+    remark #15488: --- end vector loop cost summary ---
+    remark #15447: --- begin vector loop memory reference summary ---
+    remark #15450: unmasked unaligned unit stride loads: 2 
+    remark #15451: unmasked unaligned unit stride stores: 1 
+    remark #15474: --- end vector loop memory reference summary ---
+LOOP END
+
+LOOP BEGIN at KernelAuto.cpp (104, 5)
+<Remainder loop for vectorization>
+LOOP END
+=================================================================
+
+Begin optimization report for: main
+
+LOOP BEGIN at KernelAuto.cpp (129, 5)
+<Multiversioned v1>
+<Multiversioned v1>
+LOOP END
+
+LOOP BEGIN at KernelAuto.cpp (129, 5)
+<Multiversioned v1>
+<Multiversioned v2>
+    remark #15300: LOOP WAS VECTORIZED
+    remark #15305: vectorization support: vector length 4
+    remark #15389: vectorization support: unmasked unaligned unit stride store: [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (130, 9) ] 
+    remark #15389: vectorization support: unmasked unaligned unit stride store: [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (131, 9) ] 
+    remark #15389: vectorization support: unmasked unaligned unit stride store: [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (132, 9) ] 
+    remark #15475: --- begin vector loop cost summary ---
+    remark #15476: scalar cost: 5.000000 
+    remark #15477: vector cost: 2.140625 
+    remark #15478: estimated potential speedup: 2.156250 
+    remark #15309: vectorization support: normalized vectorization overhead 0.921875
+    remark #15488: --- end vector loop cost summary ---
+    remark #15447: --- begin vector loop memory reference summary ---
+    remark #15451: unmasked unaligned unit stride stores: 3 
+    remark #15474: --- end vector loop memory reference summary ---
+LOOP END
+
+LOOP BEGIN at KernelAuto.cpp (129, 5)
+<Multiversioned v1>
+<Multiversioned v2>
+<Remainder loop for vectorization>
+LOOP END
+
+LOOP BEGIN at KernelAuto.cpp (129, 5)
+<Multiversioned v2>
+    remark #15615: Loop was not vectorized: not vectorizable due to data dependence, fall-back loop for multiversioning
+LOOP END
+
+LOOP BEGIN at KernelAuto.cpp (140, 5)
+<Predicate Optimized v1>
+
+    LOOP BEGIN at KernelAuto.cpp (142, 9)
+    LOOP END
+LOOP END
+
+LOOP BEGIN at KernelAuto.cpp (140, 5)
+<Predicate Optimized v2>
+    remark #15541: loop was not vectorized: outer loop is not an auto-vectorization candidate.
+
+    LOOP BEGIN at KernelAuto.cpp (142, 9)
+        remark #15344: Loop was not vectorized: vector dependence prevents vectorization
+        remark #15346: vector dependence: assumed FLOW dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (143, 13) ] and [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (143, 30) ] 
+        remark #15346: vector dependence: assumed FLOW dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (144, 13) ] and [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (143, 30) ] 
+        remark #15346: vector dependence: assumed OUTPUT dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (144, 13) ] and [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (143, 13) ] 
+        remark #15346: vector dependence: assumed FLOW dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (144, 13) ] and [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (144, 30) ] 
+        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (144, 30) ] and [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (143, 13) ] 
+    LOOP END
+
+    LOOP BEGIN at KernelAuto.cpp (142, 9)
+    <Remainder loop>
+    LOOP END
+LOOP END
+=================================================================
+
+Begin optimization report for: std::vector<float, std::allocator<float>>::vector()
+=================================================================
+
+Begin optimization report for: std::allocator<char>::allocator()
+=================================================================
+
+Begin optimization report for: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::basic_string<std::allocator<char>>(char const*, std::allocator<char> const&)
+=================================================================
+
+Begin optimization report for: std::__new_allocator<char>::~__new_allocator()
+=================================================================
+
+Begin optimization report for: std::vector<float, std::allocator<float>>::empty() const
+=================================================================
+
+Begin optimization report for: _mm_malloc(unsigned long, unsigned long)
+=================================================================
+
+Begin optimization report for: std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l>>, std::chrono::duration<long, std::ratio<1l, 1000000000l>>>::type std::chrono::operator-<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l>>, std::chrono::duration<long, std::ratio<1l, 1000000000l>>>(std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l>>> const&, std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l>>> const&)
+=================================================================
+
+Begin optimization report for: std::chrono::duration<double, std::ratio<1l, 1l>>::duration<long, std::ratio<1l, 1000000000l>, void>(std::chrono::duration<long, std::ratio<1l, 1000000000l>> const&)
+=================================================================
+
+Begin optimization report for: std::ostream::operator<<(double)
+=================================================================
+
+Begin optimization report for: std::chrono::duration<double, std::ratio<1l, 1l>>::count() const
+=================================================================
+
+Begin optimization report for: _mm_free(void*)
+=================================================================
+
+Begin optimization report for: std::vector<float, std::allocator<float>>::~vector()
+=================================================================
+
+Begin optimization report for: std::_Vector_base<float, std::allocator<float>>::_Vector_base()
+=================================================================
+
+Begin optimization report for: std::_Vector_base<float, std::allocator<float>>::_Vector_impl::_Vector_impl()
+=================================================================
+
+Begin optimization report for: std::allocator<float>::allocator()
+=================================================================
+
+Begin optimization report for: std::_Vector_base<float, std::allocator<float>>::_Vector_impl_data::_Vector_impl_data()
+=================================================================
+
+Begin optimization report for: std::__new_allocator<float>::__new_allocator()
+=================================================================
+
+Begin optimization report for: std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l>>, std::chrono::duration<long, std::ratio<1l, 1000000000l>>>::type std::chrono::operator-<long, std::ratio<1l, 1000000000l>, long, std::ratio<1l, 1000000000l>>(std::chrono::duration<long, std::ratio<1l, 1000000000l>> const&, std::chrono::duration<long, std::ratio<1l, 1000000000l>> const&)
+=================================================================
+
+Begin optimization report for: std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l>>>::time_since_epoch() const
+=================================================================
+
+Begin optimization report for: std::chrono::duration<long, std::ratio<1l, 1000000000l>>::count() const
+=================================================================
+
+Begin optimization report for: std::chrono::duration<long, std::ratio<1l, 1000000000l>>::duration<long, void>(long const&)
+=================================================================
+
+Begin optimization report for: std::enable_if<__is_duration<std::chrono::duration<double, std::ratio<1l, 1l>>>::value, std::chrono::duration<double, std::ratio<1l, 1l>>>::type std::chrono::duration_cast<std::chrono::duration<double, std::ratio<1l, 1l>>, long, std::ratio<1l, 1000000000l>>(std::chrono::duration<long, std::ratio<1l, 1000000000l>> const&)
+=================================================================
+
+Begin optimization report for: std::chrono::duration<double, std::ratio<1l, 1l>> std::chrono::__duration_cast_impl<std::chrono::duration<double, std::ratio<1l, 1l>>, std::ratio<1l, 1000000000l>, double, true, false>::__cast<long, std::ratio<1l, 1000000000l>>(std::chrono::duration<long, std::ratio<1l, 1000000000l>> const&)
+=================================================================
+
+Begin optimization report for: std::chrono::duration<double, std::ratio<1l, 1l>>::duration<double, void>(double const&)
+=================================================================
+
+Begin optimization report for: std::__new_allocator<char>::__new_allocator()
+=================================================================
+
+Begin optimization report for: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::_M_dispose()
+=================================================================
+
+Begin optimization report for: __clang_call_terminate
+=================================================================
+
+Begin optimization report for: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::_Alloc_hider::~_Alloc_hider()
+=================================================================
+
+Begin optimization report for: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::_M_is_local() const
+=================================================================
+
+Begin optimization report for: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::_M_destroy(unsigned long)
+=================================================================
+
+Begin optimization report for: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::_M_data() const
+=================================================================
+
+Begin optimization report for: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::_M_local_data() const
+=================================================================
+
+Begin optimization report for: std::__ptr_traits_ptr_to<char const*, char const, false>::pointer_to(char const&)
+=================================================================
+
+Begin optimization report for: std::allocator_traits<std::allocator<char>>::deallocate(std::allocator<char>&, char*, unsigned long)
+=================================================================
+
+Begin optimization report for: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::_M_get_allocator()
+=================================================================
+
+Begin optimization report for: std::__new_allocator<char>::deallocate(char*, unsigned long)
+=================================================================
+
+Begin optimization report for: std::basic_ios<char, std::char_traits<char>>::basic_ios()
+=================================================================
+
+Begin optimization report for: std::basic_istream<char, std::char_traits<char>>::basic_istream()
+=================================================================
+
+Begin optimization report for: std::basic_ifstream<char, std::char_traits<char>>::open(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, std::_Ios_Openmode)
+=================================================================
+
+Begin optimization report for: std::basic_filebuf<char, std::char_traits<char>>::~basic_filebuf()
+=================================================================
+
+Begin optimization report for: std::basic_istream<char, std::char_traits<char>>::~basic_istream()
+=================================================================
+
+Begin optimization report for: std::basic_filebuf<char, std::char_traits<char>>::open(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, std::_Ios_Openmode)
+=================================================================
+
+Begin optimization report for: std::operator|(std::_Ios_Openmode, std::_Ios_Openmode)
+=================================================================
+
+Begin optimization report for: std::basic_ios<char, std::char_traits<char>>::setstate(std::_Ios_Iostate)
+=================================================================
+
+Begin optimization report for: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::c_str() const
+=================================================================
+
+Begin optimization report for: std::operator|(std::_Ios_Iostate, std::_Ios_Iostate)
+=================================================================
+
+Begin optimization report for: std::basic_ios<char, std::char_traits<char>>::rdstate() const
+=================================================================
+
+Begin optimization report for: std::basic_streambuf<char, std::char_traits<char>>::~basic_streambuf()
+=================================================================
+
+Begin optimization report for: std::basic_ifstream<char, std::char_traits<char>>::~basic_ifstream()
+=================================================================
+
+Begin optimization report for: virtual thunk to std::basic_ifstream<char, std::char_traits<char>>::~basic_ifstream()
+=================================================================
+
+Begin optimization report for: std::basic_filebuf<char, std::char_traits<char>>::is_open() const
+=================================================================
+
+Begin optimization report for: std::char_traits<char>::length(char const*)
+=================================================================
+
+Begin optimization report for: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::data() const
+=================================================================
+
+Begin optimization report for: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::size() const
+=================================================================
+
+Begin optimization report for: std::basic_ostream<char, std::char_traits<char>>& std::flush<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>>&)
+=================================================================
+
+Begin optimization report for: std::basic_ios<char, std::char_traits<char>>::widen(char) const
+=================================================================
+
+Begin optimization report for: std::ctype<char> const& std::__check_facet<std::ctype<char>>(std::ctype<char> const*)
+=================================================================
+
+Begin optimization report for: std::ctype<char>::widen(char) const
+=================================================================
+
+Begin optimization report for: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::_M_local_data()
+=================================================================
+
+Begin optimization report for: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::_Alloc_hider::_Alloc_hider(char*, std::allocator<char>&&)
+=================================================================
+
+Begin optimization report for: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::_M_init_local_buf()
+=================================================================
+
+Begin optimization report for: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::_M_set_length(unsigned long)
+=================================================================
+
+Begin optimization report for: std::__ptr_traits_ptr_to<char*, char, false>::pointer_to(char&)
+=================================================================
+
+Begin optimization report for: std::allocator<char>::allocator(std::allocator<char> const&)
+=================================================================
+
+Begin optimization report for: std::__new_allocator<char>::__new_allocator(std::__new_allocator<char> const&)
+=================================================================
+
+Begin optimization report for: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::_M_length(unsigned long)
+=================================================================
+
+Begin optimization report for: std::char_traits<char>::assign(char&, char const&)
+=================================================================
+
+Begin optimization report for: std::basic_ios<char, std::char_traits<char>>::fail() const
+=================================================================
+
+Begin optimization report for: std::operator&(std::_Ios_Iostate, std::_Ios_Iostate)
+=================================================================
+
+Begin optimization report for: std::vector<float, std::allocator<float>>::size() const
+=================================================================
+
+Begin optimization report for: std::vector<float, std::allocator<float>>::_M_default_append(unsigned long)
+=================================================================
+
+Begin optimization report for: std::vector<float, std::allocator<float>>::_M_erase_at_end(float*)
+=================================================================
+
+Begin optimization report for: std::vector<float, std::allocator<float>>::max_size() const
+=================================================================
+
+Begin optimization report for: float* std::__uninitialized_default_n_a<float*, unsigned long, float>(float*, unsigned long, std::allocator<float>&)
+=================================================================
+
+Begin optimization report for: std::_Vector_base<float, std::allocator<float>>::_M_get_Tp_allocator()
+=================================================================
+
+Begin optimization report for: std::vector<float, std::allocator<float>>::_M_check_len(unsigned long, char const*) const
+=================================================================
+
+Begin optimization report for: std::_Vector_base<float, std::allocator<float>>::_M_allocate(unsigned long)
+=================================================================
+
+Begin optimization report for: std::_Vector_base<float, std::allocator<float>>::_M_deallocate(float*, unsigned long)
+=================================================================
+
+Begin optimization report for: std::vector<float, std::allocator<float>>::_S_relocate(float*, float*, float*, std::allocator<float>&)
+=================================================================
+
+Begin optimization report for: std::vector<float, std::allocator<float>>::_S_max_size(std::allocator<float> const&)
+=================================================================
+
+Begin optimization report for: std::_Vector_base<float, std::allocator<float>>::_M_get_Tp_allocator() const
+=================================================================
+
+Begin optimization report for: std::allocator_traits<std::allocator<float>>::max_size(std::allocator<float> const&)
+=================================================================
+
+Begin optimization report for: unsigned long const& std::min<unsigned long>(unsigned long const&, unsigned long const&)
+=================================================================
+
+Begin optimization report for: std::__new_allocator<float>::max_size() const
+=================================================================
+
+Begin optimization report for: std::__new_allocator<float>::_M_max_size() const
+=================================================================
+
+Begin optimization report for: float* std::__uninitialized_default_n<float*, unsigned long>(float*, unsigned long)
+=================================================================
+
+Begin optimization report for: float* std::__uninitialized_default_n_1<true>::__uninit_default_n<float*, unsigned long>(float*, unsigned long)
+=================================================================
+
+Begin optimization report for: void std::_Construct<float>(float*)
+=================================================================
+
+Begin optimization report for: float* std::fill_n<float*, unsigned long, float>(float*, unsigned long, float const&)
+=================================================================
+
+Begin optimization report for: float* std::__fill_n_a<float*, unsigned long, float>(float*, unsigned long, float const&, std::random_access_iterator_tag)
+=================================================================
+
+Begin optimization report for: std::__size_to_integer(unsigned long)
+=================================================================
+
+Begin optimization report for: std::iterator_traits<float*>::iterator_category std::__iterator_category<float*>(float* const&)
+=================================================================
+
+Begin optimization report for: void std::__fill_a<float*, float>(float*, float*, float const&)
+=================================================================
+
+Begin optimization report for: __gnu_cxx::__enable_if<__is_scalar<float>::__value, void>::__type std::__fill_a1<float*, float>(float*, float*, float const&)
+
+LOOP BEGIN at /usr/lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h (930, 7)
+    remark #15300: LOOP WAS VECTORIZED
+    remark #15305: vectorization support: vector length 8
+    remark #15389: vectorization support: unmasked unaligned unit stride store: __first [ /usr/lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h (931, 11) ] 
+    remark #15475: --- begin vector loop cost summary ---
+    remark #15476: scalar cost: 3.000000 
+    remark #15477: vector cost: 1.421875 
+    remark #15478: estimated potential speedup: 2.015625 
+    remark #15309: vectorization support: normalized vectorization overhead 2.109375
+    remark #15488: --- end vector loop cost summary ---
+    remark #15447: --- begin vector loop memory reference summary ---
+    remark #15451: unmasked unaligned unit stride stores: 1 
+    remark #15474: --- end vector loop memory reference summary ---
+LOOP END
+
+LOOP BEGIN at /usr/lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/stl_algobase.h (930, 7)
+<Remainder loop for vectorization>
+LOOP END
+=================================================================
+
+Begin optimization report for: unsigned long const& std::max<unsigned long>(unsigned long const&, unsigned long const&)
+=================================================================
+
+Begin optimization report for: std::allocator_traits<std::allocator<float>>::allocate(std::allocator<float>&, unsigned long)
+=================================================================
+
+Begin optimization report for: std::__new_allocator<float>::allocate(unsigned long, void const*)
+=================================================================
+
+Begin optimization report for: std::allocator_traits<std::allocator<float>>::deallocate(std::allocator<float>&, float*, unsigned long)
+=================================================================
+
+Begin optimization report for: std::__new_allocator<float>::deallocate(float*, unsigned long)
+=================================================================
+
+Begin optimization report for: float* std::__relocate_a<float*, float*, std::allocator<float>>(float*, float*, float*, std::allocator<float>&)
+=================================================================
+
+Begin optimization report for: std::enable_if<std::__is_bitwise_relocatable<float>::value, float*>::type std::__relocate_a_1<float, float>(float*, float*, float*, std::allocator<float>&)
+=================================================================
+
+Begin optimization report for: float* std::__niter_base<float*>(float*)
+=================================================================
+
+Begin optimization report for: void std::_Destroy<float*, float>(float*, float*, std::allocator<float>&)
+=================================================================
+
+Begin optimization report for: void std::_Destroy<float*>(float*, float*)
+=================================================================
+
+Begin optimization report for: void std::_Destroy_aux<true>::__destroy<float*>(float*, float*)
+=================================================================
+
+Begin optimization report for: std::char_traits<char>::compare(char const*, char const*, unsigned long)
+=================================================================
+
+Begin optimization report for: std::__new_allocator<unsigned char>::__new_allocator()
+=================================================================
+
+Begin optimization report for: std::vector<unsigned char, std::allocator<unsigned char>>::_S_check_init_len(unsigned long, std::allocator<unsigned char> const&)
+=================================================================
+
+Begin optimization report for: std::_Vector_base<unsigned char, std::allocator<unsigned char>>::_Vector_base(unsigned long, std::allocator<unsigned char> const&)
+=================================================================
+
+Begin optimization report for: std::vector<unsigned char, std::allocator<unsigned char>>::_M_default_initialize(unsigned long)
+=================================================================
+
+Begin optimization report for: std::_Vector_base<unsigned char, std::allocator<unsigned char>>::~_Vector_base()
+=================================================================
+
+Begin optimization report for: std::vector<unsigned char, std::allocator<unsigned char>>::_S_max_size(std::allocator<unsigned char> const&)
+=================================================================
+
+Begin optimization report for: std::allocator<unsigned char>::allocator(std::allocator<unsigned char> const&)
+=================================================================
+
+Begin optimization report for: std::allocator_traits<std::allocator<unsigned char>>::max_size(std::allocator<unsigned char> const&)
+=================================================================
+
+Begin optimization report for: std::__new_allocator<unsigned char>::max_size() const
+=================================================================
+
+Begin optimization report for: std::__new_allocator<unsigned char>::_M_max_size() const
+=================================================================
+
+Begin optimization report for: std::__new_allocator<unsigned char>::__new_allocator(std::__new_allocator<unsigned char> const&)
+=================================================================
+
+Begin optimization report for: std::_Vector_base<unsigned char, std::allocator<unsigned char>>::_Vector_impl::_Vector_impl(std::allocator<unsigned char> const&)
+=================================================================
+
+Begin optimization report for: std::_Vector_base<unsigned char, std::allocator<unsigned char>>::_M_create_storage(unsigned long)
+=================================================================
+
+Begin optimization report for: std::__new_allocator<unsigned char>::~__new_allocator()
+=================================================================
+
+Begin optimization report for: std::_Vector_base<unsigned char, std::allocator<unsigned char>>::_Vector_impl_data::_Vector_impl_data()
+=================================================================
+
+Begin optimization report for: std::_Vector_base<unsigned char, std::allocator<unsigned char>>::_M_allocate(unsigned long)
+=================================================================
+
+Begin optimization report for: std::allocator_traits<std::allocator<unsigned char>>::allocate(std::allocator<unsigned char>&, unsigned long)
+=================================================================
+
+Begin optimization report for: std::__new_allocator<unsigned char>::allocate(unsigned long, void const*)
+=================================================================
+
+Begin optimization report for: unsigned char* std::__uninitialized_default_n_a<unsigned char*, unsigned long, unsigned char>(unsigned char*, unsigned long, std::allocator<unsigned char>&)
+=================================================================
+
+Begin optimization report for: std::_Vector_base<unsigned char, std::allocator<unsigned char>>::_M_get_Tp_allocator()
+=================================================================
+
+Begin optimization report for: unsigned char* std::__uninitialized_default_n<unsigned char*, unsigned long>(unsigned char*, unsigned long)
+=================================================================
+
+Begin optimization report for: unsigned char* std::__uninitialized_default_n_1<true>::__uninit_default_n<unsigned char*, unsigned long>(unsigned char*, unsigned long)
+=================================================================
+
+Begin optimization report for: void std::_Construct<unsigned char>(unsigned char*)
+=================================================================
+
+Begin optimization report for: unsigned char* std::fill_n<unsigned char*, unsigned long, unsigned char>(unsigned char*, unsigned long, unsigned char const&)
+=================================================================
+
+Begin optimization report for: unsigned char* std::__fill_n_a<unsigned char*, unsigned long, unsigned char>(unsigned char*, unsigned long, unsigned char const&, std::random_access_iterator_tag)
+=================================================================
+
+Begin optimization report for: std::iterator_traits<unsigned char*>::iterator_category std::__iterator_category<unsigned char*>(unsigned char* const&)
+=================================================================
+
+Begin optimization report for: void std::__fill_a<unsigned char*, unsigned char>(unsigned char*, unsigned char*, unsigned char const&)
+=================================================================
+
+Begin optimization report for: __gnu_cxx::__enable_if<__is_byte<unsigned char>::__value, void>::__type std::__fill_a1<unsigned char>(unsigned char*, unsigned char*, unsigned char const&)
+=================================================================
+
+Begin optimization report for: std::_Vector_base<unsigned char, std::allocator<unsigned char>>::_M_deallocate(unsigned char*, unsigned long)
+=================================================================
+
+Begin optimization report for: std::allocator_traits<std::allocator<unsigned char>>::deallocate(std::allocator<unsigned char>&, unsigned char*, unsigned long)
+=================================================================
+
+Begin optimization report for: std::__new_allocator<unsigned char>::deallocate(unsigned char*, unsigned long)
+=================================================================
+
+Begin optimization report for: void std::_Destroy<unsigned char*, unsigned char>(unsigned char*, unsigned char*, std::allocator<unsigned char>&)
+=================================================================
+
+Begin optimization report for: void std::_Destroy<unsigned char*>(unsigned char*, unsigned char*)
+=================================================================
+
+Begin optimization report for: void std::_Destroy_aux<true>::__destroy<unsigned char*>(unsigned char*, unsigned char*)
+=================================================================
+
+Begin optimization report for: unsigned char* std::vector<unsigned char, std::allocator<unsigned char>>::_M_data_ptr<unsigned char>(unsigned char*) const
+=================================================================
+
+Begin optimization report for: std::basic_ostream<char, std::char_traits<char>>::basic_ostream()
+=================================================================
+
+Begin optimization report for: std::basic_ofstream<char, std::char_traits<char>>::open(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, std::_Ios_Openmode)
+=================================================================
+
+Begin optimization report for: std::basic_ostream<char, std::char_traits<char>>::~basic_ostream()
+=================================================================
+
+Begin optimization report for: std::basic_ofstream<char, std::char_traits<char>>::~basic_ofstream()
+=================================================================
+
+Begin optimization report for: virtual thunk to std::basic_ofstream<char, std::char_traits<char>>::~basic_ofstream()
+=================================================================
+
+Begin optimization report for: std::_Vector_base<float, std::allocator<float>>::~_Vector_base()
+=================================================================
+
+Begin optimization report for: std::__new_allocator<float>::~__new_allocator()
+=================================================================
+
+Begin optimization report for: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::_Alloc_hider::_Alloc_hider(char*, std::allocator<char> const&)
+=================================================================
+
+Begin optimization report for: void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag)
+=================================================================
+
+Begin optimization report for: std::iterator_traits<char const*>::difference_type std::distance<char const*>(char const*, char const*)
+=================================================================
+
+Begin optimization report for: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::_M_data(char*)
+=================================================================
+
+Begin optimization report for: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::_M_capacity(unsigned long)
+=================================================================
+
+Begin optimization report for: void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag)::_Guard::_Guard(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>*)
+=================================================================
+
+Begin optimization report for: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::_S_copy_chars(char*, char const*, char const*)
+=================================================================
+
+Begin optimization report for: void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag)::_Guard::~_Guard()
+=================================================================
+
+Begin optimization report for: std::iterator_traits<char const*>::difference_type std::__distance<char const*>(char const*, char const*, std::random_access_iterator_tag)
+=================================================================
+
+Begin optimization report for: std::iterator_traits<char const*>::iterator_category std::__iterator_category<char const*>(char const* const&)
+=================================================================
+
+Begin optimization report for: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>>::_S_copy(char*, char const*, unsigned long)
+=================================================================
+
+Begin optimization report for: std::char_traits<char>::copy(char*, char const*, unsigned long)
+=================================================================
+
+Begin optimization report for: bool __gnu_cxx::operator==<float const*, std::vector<float, std::allocator<float>>>(__gnu_cxx::__normal_iterator<float const*, std::vector<float, std::allocator<float>>> const&, __gnu_cxx::__normal_iterator<float const*, std::vector<float, std::allocator<float>>> const&)
+=================================================================
+
+Begin optimization report for: std::vector<float, std::allocator<float>>::begin() const
+=================================================================
+
+Begin optimization report for: std::vector<float, std::allocator<float>>::end() const
+=================================================================
+
+Begin optimization report for: __gnu_cxx::__normal_iterator<float const*, std::vector<float, std::allocator<float>>>::base() const
+=================================================================
+
+Begin optimization report for: __gnu_cxx::__normal_iterator<float const*, std::vector<float, std::allocator<float>>>::__normal_iterator(float const* const&)
+=================================================================
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+ <rdmgr>
+  <timestamp type="u64_t">1771558604</timestamp>
+  <hostname type="string">daniel-Gordo-friki</hostname>
+  <os type="string">linux</os>
+  <product type="string">Intel® Advisor 2025.4.0</product>
+  <buildNumber type="s32_t">616430</buildNumber>
+  <logicalCPUCount type="s32_t">24</logicalCPUCount>
+  <physicalCoreCount type="s32_t">12</physicalCoreCount>
+  <processorPackageCount type="s32_t">1</processorPackageCount>
+  <CPUFrequency type="s64_t">1731113000</CPUFrequency>
+  <CPUFamily type="s32_t">25</CPUFamily>
+  <CPUModel type="s32_t">33</CPUModel>
+  <CPUStepping type="s32_t">0</CPUStepping>
+  <CPUBrandName type="string">AMD Ryzen 9 5900X 12-Core Processor</CPUBrandName>
+  <isa type="string">avx2</isa>
+ </rdmgr>
+</root>
