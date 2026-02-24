@@ -12,8 +12,9 @@
 
 using namespace std;
 
-
+// Función para leer imagen PGM
 void leer_pgm(const string& filename, vector<float>& buffer, int& w, int& h) {
+
     // Abrimos en modo binario por si acaso es P5
     ifstream file(filename, ios::binary); 
     if (!file.is_open()) {
@@ -59,11 +60,8 @@ void leer_pgm(const string& filename, vector<float>& buffer, int& w, int& h) {
     file.close();
 }
 
-// Función para escribir PGM (Formato P2)
+// Función para escribir PGM
 void escribir_pgm(const string& filename, float* buffer, int w, int h) {
-
-    // En escribir_pgm, puedes amplificar el brillo temporalmente así:
-    //int val = static_cast<int>(min(255.0f, buffer[i] * 2.0f)); // El * 2.0f aumenta el contraste
 
     ofstream file(filename);
     if (!file.is_open()) return;
@@ -97,7 +95,9 @@ void calcular_gradientes_sobel(const vector<float>& img, float* Gx, float* Gy, i
     }
 }
 
+// Kernel Explicit AVX2
 void sobel_explicit_avx2(const float* Gx, const float* Gy, float* Mag, int N) {
+
     int i = 0;
     // Procesar de 8 en 8 (AVX2 maneja 8 floats de 32 bits)
     for (; i <= N - 8; i += 8) {
@@ -111,10 +111,12 @@ void sobel_explicit_avx2(const float* Gx, const float* Gy, float* Mag, int N) {
         __m256 res = _mm256_sqrt_ps(sum);
         _mm256_storeu_ps(&Mag[i], res);
     }
+
     // Resto escalar para tamaños no múltiplos de 8
     for (; i < N; i++) {
         Mag[i] = sqrtf(Gx[i] * Gx[i] + Gy[i] * Gy[i]);
     }
+
 }
 
 int main() {
@@ -136,13 +138,12 @@ int main() {
     float* Mag = (float*)_mm_malloc(TOTAL_SIZE * sizeof(float), 32);
 
 
-    // --- AGREGA ESTO PARA LIMPIAR LA MEMORIA ---
+    // AGREGA ESTO PARA LIMPIAR LA MEMORIA
     for (int i = 0; i < TOTAL_SIZE; i++) {
         Gx[i] = 0.0f;
         Gy[i] = 0.0f;
         Mag[i] = 0.0f;
     }
-    // -------------------------------------------
 
     // 2. Extraer los gradientes reales para la simulación
     calcular_gradientes_sobel(raw_img, Gx, Gy, WIDTH, HEIGHT);
@@ -166,8 +167,8 @@ int main() {
     cout << "Versión Explicit AVX2 - Tiempo: " << diff.count() << " s\n";
 
     // 5. Generar imagen procesada real
-    escribir_pgm("output_auto.pgm", Mag, WIDTH, HEIGHT);
-    cout << "Imagen 'output_auto.pgm' generada correctamente.\n";
+    escribir_pgm("output_explicit.pgm", Mag, WIDTH, HEIGHT);
+    cout << "Imagen 'output_explicit.pgm' generada correctamente.\n";
 
     _mm_free(Gx); _mm_free(Gy); _mm_free(Mag);
     return 0;

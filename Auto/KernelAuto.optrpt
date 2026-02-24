@@ -1,12 +1,12 @@
 Begin optimization report for: leer_pgm(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, std::vector<float, std::allocator<float>>&, int&, int&)
 
-LOOP BEGIN at KernelAuto.cpp (34, 5)
+LOOP BEGIN at KernelAuto.cpp (35, 5)
 LOOP END
 
-LOOP BEGIN at KernelAuto.cpp (45, 9)
+LOOP BEGIN at KernelAuto.cpp (46, 9)
 LOOP END
 
-LOOP BEGIN at KernelAuto.cpp (55, 9)
+LOOP BEGIN at KernelAuto.cpp (56, 9)
     remark #15521: Loop was not vectorized: loop control variable was not identified. Explicitly compute the iteration count before executing the loop or try using canonical loop form from OpenMP specification
 LOOP END
 =================================================================
@@ -79,7 +79,7 @@ Begin optimization report for: std::basic_ifstream<char, std::char_traits<char>>
 
 Begin optimization report for: escribir_pgm(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, float*, int, int)
 
-LOOP BEGIN at KernelAuto.cpp (71, 5)
+LOOP BEGIN at KernelAuto.cpp (69, 5)
 LOOP END
 =================================================================
 
@@ -100,39 +100,39 @@ Begin optimization report for: std::basic_ofstream<char, std::char_traits<char>>
 
 Begin optimization report for: calcular_gradientes_sobel(std::vector<float, std::allocator<float>> const&, float*, float*, int, int)
 
-LOOP BEGIN at KernelAuto.cpp (84, 5)
+LOOP BEGIN at KernelAuto.cpp (83, 5)
 <Predicate Optimized v1>
 
-    LOOP BEGIN at KernelAuto.cpp (85, 9)
+    LOOP BEGIN at KernelAuto.cpp (84, 9)
 
-        LOOP BEGIN at KernelAuto.cpp (87, 13)
+        LOOP BEGIN at KernelAuto.cpp (86, 13)
 
-            LOOP BEGIN at KernelAuto.cpp (88, 17)
+            LOOP BEGIN at KernelAuto.cpp (87, 17)
             LOOP END
         LOOP END
     LOOP END
 LOOP END
 
-LOOP BEGIN at KernelAuto.cpp (84, 5)
+LOOP BEGIN at KernelAuto.cpp (83, 5)
 <Predicate Optimized v2>
     remark #15541: loop was not vectorized: outer loop is not an auto-vectorization candidate.
 
-    LOOP BEGIN at KernelAuto.cpp (85, 9)
+    LOOP BEGIN at KernelAuto.cpp (84, 9)
         remark #15344: Loop was not vectorized: vector dependence prevents vectorization
-        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (89, 35) ] and img 
-        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (89, 35) ] and img 
-        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (89, 35) ] and img 
-        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (89, 35) ] and img 
-        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (89, 35) ] and img 
-        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (89, 35) ] and img 
-        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (89, 35) ] and img 
-        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (89, 35) ] and img 
-        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (89, 35) ] and img 
-        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (89, 35) ] and img 
+        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (88, 35) ] and img 
+        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (88, 35) ] and img 
+        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (88, 35) ] and img 
+        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (88, 35) ] and img 
+        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (88, 35) ] and img 
+        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (88, 35) ] and img 
+        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (88, 35) ] and img 
+        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (88, 35) ] and img 
+        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (88, 35) ] and img 
+        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (88, 35) ] and img 
 
-        LOOP BEGIN at KernelAuto.cpp (87, 13)
+        LOOP BEGIN at KernelAuto.cpp (86, 13)
 
-            LOOP BEGIN at KernelAuto.cpp (88, 17)
+            LOOP BEGIN at KernelAuto.cpp (87, 17)
             LOOP END
         LOOP END
     LOOP END
@@ -144,12 +144,12 @@ Begin optimization report for: std::vector<float, std::allocator<float>>::operat
 
 Begin optimization report for: sobel_auto(float const*, float const*, float*, int)
 
-LOOP BEGIN at KernelAuto.cpp (104, 5)
+LOOP BEGIN at KernelAuto.cpp (102, 5)
     remark #15300: LOOP WAS VECTORIZED
     remark #15305: vectorization support: vector length 16
-    remark #15389: vectorization support: unmasked unaligned unit stride load: Gx [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (105, 24) ] 
-    remark #15389: vectorization support: unmasked unaligned unit stride load: Gy [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (105, 40) ] 
-    remark #15389: vectorization support: unmasked unaligned unit stride store: Mag [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (105, 9) ] 
+    remark #15389: vectorization support: unmasked unaligned unit stride load: Gx [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (103, 24) ] 
+    remark #15389: vectorization support: unmasked unaligned unit stride load: Gy [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (103, 40) ] 
+    remark #15389: vectorization support: unmasked unaligned unit stride store: Mag [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (103, 9) ] 
     remark #15475: --- begin vector loop cost summary ---
     remark #15476: scalar cost: 15.000000 
     remark #15477: vector cost: 3.859375 
@@ -163,13 +163,13 @@ LOOP BEGIN at KernelAuto.cpp (104, 5)
     remark #15474: --- end vector loop memory reference summary ---
 LOOP END
 
-LOOP BEGIN at KernelAuto.cpp (104, 5)
+LOOP BEGIN at KernelAuto.cpp (102, 5)
 <Remainder loop for vectorization>
     remark #15439: remainder loop was vectorized (unmasked)
     remark #15305: vectorization support: vector length 4
-    remark #15389: vectorization support: unmasked unaligned unit stride load: Gx [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (105, 24) ] 
-    remark #15389: vectorization support: unmasked unaligned unit stride load: Gy [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (105, 40) ] 
-    remark #15389: vectorization support: unmasked unaligned unit stride store: Mag [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (105, 9) ] 
+    remark #15389: vectorization support: unmasked unaligned unit stride load: Gx [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (103, 24) ] 
+    remark #15389: vectorization support: unmasked unaligned unit stride load: Gy [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (103, 40) ] 
+    remark #15389: vectorization support: unmasked unaligned unit stride store: Mag [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (103, 9) ] 
     remark #15475: --- begin vector loop cost summary ---
     remark #15591: vectorized intrinsic functions: 1
     remark #15488: --- end vector loop cost summary ---
@@ -179,26 +179,26 @@ LOOP BEGIN at KernelAuto.cpp (104, 5)
     remark #15474: --- end vector loop memory reference summary ---
 LOOP END
 
-LOOP BEGIN at KernelAuto.cpp (104, 5)
+LOOP BEGIN at KernelAuto.cpp (102, 5)
 <Remainder loop for vectorization>
 LOOP END
 =================================================================
 
 Begin optimization report for: main
 
-LOOP BEGIN at KernelAuto.cpp (129, 5)
+LOOP BEGIN at KernelAuto.cpp (127, 5)
 <Multiversioned v1>
 <Multiversioned v1>
 LOOP END
 
-LOOP BEGIN at KernelAuto.cpp (129, 5)
+LOOP BEGIN at KernelAuto.cpp (127, 5)
 <Multiversioned v1>
 <Multiversioned v2>
     remark #15300: LOOP WAS VECTORIZED
     remark #15305: vectorization support: vector length 4
+    remark #15389: vectorization support: unmasked unaligned unit stride store: [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (128, 9) ] 
+    remark #15389: vectorization support: unmasked unaligned unit stride store: [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (129, 9) ] 
     remark #15389: vectorization support: unmasked unaligned unit stride store: [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (130, 9) ] 
-    remark #15389: vectorization support: unmasked unaligned unit stride store: [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (131, 9) ] 
-    remark #15389: vectorization support: unmasked unaligned unit stride store: [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (132, 9) ] 
     remark #15475: --- begin vector loop cost summary ---
     remark #15476: scalar cost: 5.000000 
     remark #15477: vector cost: 2.140625 
@@ -210,38 +210,38 @@ LOOP BEGIN at KernelAuto.cpp (129, 5)
     remark #15474: --- end vector loop memory reference summary ---
 LOOP END
 
-LOOP BEGIN at KernelAuto.cpp (129, 5)
+LOOP BEGIN at KernelAuto.cpp (127, 5)
 <Multiversioned v1>
 <Multiversioned v2>
 <Remainder loop for vectorization>
 LOOP END
 
-LOOP BEGIN at KernelAuto.cpp (129, 5)
+LOOP BEGIN at KernelAuto.cpp (127, 5)
 <Multiversioned v2>
     remark #15615: Loop was not vectorized: not vectorizable due to data dependence, fall-back loop for multiversioning
 LOOP END
 
-LOOP BEGIN at KernelAuto.cpp (140, 5)
+LOOP BEGIN at KernelAuto.cpp (137, 5)
 <Predicate Optimized v1>
 
-    LOOP BEGIN at KernelAuto.cpp (142, 9)
+    LOOP BEGIN at KernelAuto.cpp (139, 9)
     LOOP END
 LOOP END
 
-LOOP BEGIN at KernelAuto.cpp (140, 5)
+LOOP BEGIN at KernelAuto.cpp (137, 5)
 <Predicate Optimized v2>
     remark #15541: loop was not vectorized: outer loop is not an auto-vectorization candidate.
 
-    LOOP BEGIN at KernelAuto.cpp (142, 9)
+    LOOP BEGIN at KernelAuto.cpp (139, 9)
         remark #15344: Loop was not vectorized: vector dependence prevents vectorization
-        remark #15346: vector dependence: assumed FLOW dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (143, 13) ] and [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (143, 30) ] 
-        remark #15346: vector dependence: assumed FLOW dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (144, 13) ] and [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (143, 30) ] 
-        remark #15346: vector dependence: assumed OUTPUT dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (144, 13) ] and [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (143, 13) ] 
-        remark #15346: vector dependence: assumed FLOW dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (144, 13) ] and [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (144, 30) ] 
-        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (144, 30) ] and [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (143, 13) ] 
+        remark #15346: vector dependence: assumed FLOW dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (140, 13) ] and [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (140, 30) ] 
+        remark #15346: vector dependence: assumed FLOW dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (141, 13) ] and [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (140, 30) ] 
+        remark #15346: vector dependence: assumed OUTPUT dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (141, 13) ] and [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (140, 13) ] 
+        remark #15346: vector dependence: assumed FLOW dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (141, 13) ] and [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (141, 30) ] 
+        remark #15346: vector dependence: assumed ANTI dependence between [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (141, 30) ] and [ /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp (140, 13) ] 
     LOOP END
 
-    LOOP BEGIN at KernelAuto.cpp (142, 9)
+    LOOP BEGIN at KernelAuto.cpp (139, 9)
     <Remainder loop>
     LOOP END
 LOOP END

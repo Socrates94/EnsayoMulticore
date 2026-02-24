@@ -11,8 +11,9 @@
 
 using namespace std;
 
-
+// Función para leer imagen PGM
 void leer_pgm(const string& filename, vector<float>& buffer, int& w, int& h) {
+
     // Abrimos en modo binario por si acaso es P5
     ifstream file(filename, ios::binary); 
     if (!file.is_open()) {
@@ -58,11 +59,8 @@ void leer_pgm(const string& filename, vector<float>& buffer, int& w, int& h) {
     file.close();
 }
 
-// Función para escribir PGM (Formato P2)
+// Función para escribir PGM
 void escribir_pgm(const string& filename, float* buffer, int w, int h) {
-
-    // En escribir_pgm, puedes amplificar el brillo temporalmente así:
-    //int val = static_cast<int>(min(255.0f, buffer[i] * 2.0f)); // El * 2.0f aumenta el contraste
 
     ofstream file(filename);
     if (!file.is_open()) return;
@@ -75,8 +73,7 @@ void escribir_pgm(const string& filename, float* buffer, int w, int h) {
 
 }
 
-// Preprocesamiento para obtener gradientes reales usando máscaras de Sobel (No se mide su tiempo)
-
+// Preprocesamiento para obtener gradientes reales usando máscaras de Sobel
 void calcular_gradientes_sobel(const vector<float>& img, float* Gx, float* Gy, int w, int h) {
 
     int mx[3][3] = {{-1, 0, 1}, {-2, 0, 2}, {-1, 0, 1}};
@@ -129,13 +126,13 @@ int main() {
     float* Mag = (float*)_mm_malloc(TOTAL_SIZE * sizeof(float), 32);
 
 
-    // --- AGREGA ESTO PARA LIMPIAR LA MEMORIA ---
+    // AGREGA ESTO PARA LIMPIAR LA MEMORIA
     for (int i = 0; i < TOTAL_SIZE; i++) {
         Gx[i] = 0.0f;
         Gy[i] = 0.0f;
         Mag[i] = 0.0f;
     }
-    // -------------------------------------------
+
 
     // 2. Extraer los gradientes reales para la simulación
     calcular_gradientes_sobel(raw_img, Gx, Gy, WIDTH, HEIGHT);
@@ -162,6 +159,9 @@ int main() {
     escribir_pgm("output_scalar.pgm", Mag, WIDTH, HEIGHT);
     cout << "Imagen 'output_scalar.pgm' generada correctamente.\n";
 
-    _mm_free(Gx); _mm_free(Gy); _mm_free(Mag);
+    _mm_free(Gx);
+    _mm_free(Gy);
+    _mm_free(Mag);
+
     return 0;
 }
