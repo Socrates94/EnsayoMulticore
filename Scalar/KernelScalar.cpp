@@ -76,13 +76,17 @@ void escribir_pgm(const string& filename, float* buffer, int w, int h) {
 }
 
 // Preprocesamiento para obtener gradientes reales usando máscaras de Sobel (No se mide su tiempo)
+
 void calcular_gradientes_sobel(const vector<float>& img, float* Gx, float* Gy, int w, int h) {
+
     int mx[3][3] = {{-1, 0, 1}, {-2, 0, 2}, {-1, 0, 1}};
     int my[3][3] = {{ 1, 2, 1}, { 0, 0, 0}, {-1,-2,-1}};
 
     for (int y = 1; y < h - 1; y++) {
+
         for (int x = 1; x < w - 1; x++) {
             float sum_x = 0, sum_y = 0;
+
             for (int ky = -1; ky <= 1; ky++) {
                 for (int kx = -1; kx <= 1; kx++) {
                     float pixel = img[(y + ky) * w + (x + kx)];
@@ -90,6 +94,7 @@ void calcular_gradientes_sobel(const vector<float>& img, float* Gx, float* Gy, i
                     sum_y += pixel * my[ky + 1][kx + 1];
                 }
             }
+
             Gx[y * w + x] = sum_x;
             Gy[y * w + x] = sum_y;
         }
@@ -98,6 +103,7 @@ void calcular_gradientes_sobel(const vector<float>& img, float* Gx, float* Gy, i
 
 // KERNEL ESCALAR BASE (El cálculo a perfilar)
 void sobel_scalar(const float* __restrict Gx, const float* __restrict Gy, float* __restrict Mag, int N) {
+    
     for (int i = 0; i < N; i++) {
         // Cálculo secuencial uno a uno de la magnitud del gradiente
         Mag[i] = sqrtf(Gx[i] * Gx[i] + Gy[i] * Gy[i]);

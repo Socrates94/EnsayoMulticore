@@ -100,7 +100,7 @@ void calcular_gradientes_sobel(const vector<float>& img, float* Gx, float* Gy, i
 // EL KERNEL A EVALUAR (Vectorización Automática)
 // Usamos #pragma ivdep para asegurar al compilador que no hay dependencias ocultas
 void sobel_auto(const float* __restrict Gx, const float* __restrict Gy, float* __restrict Mag, int N) {
-    #pragma ivdep
+    
     for (int i = 0; i < N; i++) {
         Mag[i] = sqrtf(Gx[i] * Gx[i] + Gy[i] * Gy[i]);
     }
