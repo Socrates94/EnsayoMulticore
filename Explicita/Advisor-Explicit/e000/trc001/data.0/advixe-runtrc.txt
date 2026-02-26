@@ -1,0 +1,10 @@
+
+=== Start: [2026/02/26 11:41:08] === 
+Peak bandwidth measurement started...
+Peak bandwidth measurement finished.
+Analysis started...
+Result file: /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/Advisor-Explicit/e000/trc001/trc001.advixe 
+Application exit code: 0 
+Result file: /home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/Advisor-Explicit/e000/trc001/trc001.advixe 
+Analysis completed
+=== End: [2026/02/26 11:41:23] === 

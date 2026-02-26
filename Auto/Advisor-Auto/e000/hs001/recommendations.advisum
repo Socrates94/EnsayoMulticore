@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- <!DOCTYPE IntelParallelAdvisorSummaryCollection SYSTEM  "IntelParallelAdvisorSummaryCollection.dtd"> -->
+
+<IntelParallelAdvisorSummary version="" 
+                             kind="DATAKIND_SURVEY_EX" >
+  <hotspot filename="/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp"
+           line_no="102"
+           routine="sobel_auto"
+           is_vectorized="1"
+           self_time="2.999790E-02"
+           total_time="0.000000E+00"
+           trip_counts=""
+           func_instance="9"
+           priority="0">
+           <recommendation id="rec_sqrt_c" title="Enable the use of approximate sqrt instructions" confidence="1" gain="-1"/>
+  </hotspot>
+  <hotspot filename="/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Auto/KernelAuto.cpp"
+           line_no="84"
+           routine="calcular_gradientes_sobel"
+           is_vectorized="0"
+           self_time="1.000025E-02"
+           total_time="0.000000E+00"
+           trip_counts=""
+           func_instance="4"
+           priority="0">
+           <recommendation id="rec_fma_enforce_vec_c" title="Force vectorization if possible" confidence="1" gain="-1"/>
+  </hotspot>
+</IntelParallelAdvisorSummary >

@@ -1,0 +1,389 @@
+%!TEX root = main.tex
+\section{Metodología}
+
+\subsection{Descripción del kernel}
+El kernel numérico objetivo de este estudio calcula la magnitud del gradiente de una imagen utilizando el operador Sobel. Se perfiló exclusivamente el ciclo intensivo definido por la siguiente ecuación matemática:
+\begin{equation}
+    G[i] = \sqrt{G_{x}[i]^{2} + G_{y}[i]^{2}}
+\end{equation}
+
+\subsection{Plataforma experimental (compilador, Intel OneApi)}
+Las pruebas se llevaron a cabo utilizando el compilador de C++ \texttt{icpx} perteneciente a la suite Intel oneAPI, ejecutándose sobre un procesador de arquitectura AMD. Para estabilizar las métricas del procesador, se utilizó una imagen PGM sintética de $256 \times 256$ píxeles, la cual fue replicada en memoria 800 veces para generar una carga de trabajo robusta.
+
+\subsection{Versiones implementadas (escalar, automática, guiada, explícita)}
+Se evaluaron cuatro variantes del kernel:
+\begin{itemize}
+    \item \textbf{Escalar:} Línea base compilada con \texttt{-fno-vectorize}.
+    \item \textbf{Automática:} Uso exclusivo de \texttt{\_\_restrict} y nivel de optimización \texttt{-O3}.
+    \item \textbf{Guiada:} Paralelismo forzado mediante la directiva OpenMP \texttt{\#pragma omp simd}.
+    \item \textbf{Explícita:} Inyección manual de intrínsecas AVX2 mediante \texttt{<immintrin.h>}.
+\end{itemize}
+
+\subsection{Descripción del kernel}
+El kernel numérico objetivo de este estudio calcula la magnitud del gradiente de una imagen utilizando el operador Sobel. Se aisló el ciclo computacionalmente intensivo para medir exclusivamente la eficiencia del procesador al resolver la ecuación matemática de la magnitud.
+
+\subsection{Plataforma experimental}
+El desarrollo y las pruebas se llevaron a cabo utilizando el compilador \texttt{icpx} de la suite Intel oneAPI. Se configuró un espacio de datos masivo utilizando una imagen PGM de $256 \times 256$ píxeles, replicada en memoria 800 veces para generar una carga de trabajo robusta y permitir que \textit{Intel Advisor} recolectara métricas estables.
+
+\subsection{Procedimiento de Compilación y Configuración de Perfilado}
+
+Para garantizar la validez matemática y la precisión de las métricas recolectadas por \textit{Intel Advisor}, el proceso de compilación requirió una configuración minuciosa de banderas (\textit{flags}) a través del compilador \texttt{icpx} de Intel oneAPI. El objetivo principal fue habilitar la recolección de métricas de hardware sin que las optimizaciones agresivas de la herramienta ofuscaran el análisis del código.
+
+A continuación, se detallan los comandos de compilación ejecutados mediante la terminal en sistemas basados en UNIX para generar los binarios de cada variante del kernel:
+
+\begin{itemize}
+    \item \textbf{Versión Escalar:} Se forzó la omisión de paralelismo y se deshabilitaron los reportes vectoriales para mantener un binario estrictamente secuencial.
+    \begin{lstlisting}[language=bash]
+icpx -g -O3 -march=native -fno-inline -o scalar KernelScalar.cpp
+    \end{lstlisting}
+
+    \item \textbf{Versión Automática:} Se habilitaron los reportes de vectorización para auditar las decisiones autónomas del compilador.
+    \begin{lstlisting}[language=bash]
+icpx -g -O3 -march=native -fno-inline -qopt-report=max -qopt-report-phase=vec -o auto KernelAuto.cpp
+    \end{lstlisting}
+
+    \item \textbf{Versión Guiada:} Se incluyó la directiva necesaria para compilar el estándar de multiprocesamiento simétrico.
+    \begin{lstlisting}[language=bash]
+icpx -g -O3 -march=native -qopenmp -fno-inline -qopt-report=max -qopt-report-phase=vec -o guiada KernelGuiada.cpp
+    \end{lstlisting}
+
+    \item \textbf{Versión Explícita (AVX2):} Se mantuvo la configuración de auditoría vectorial para validar la emisión de instrucciones de 256 bits.
+    \begin{lstlisting}[language=bash]
+icpx -g -O3 -march=native -fno-inline -qopt-report=max -qopt-report-phase=vec -o explicit KernelExplicit.cpp
+    \end{lstlisting}
+\end{itemize}
+
+\subsubsection{Justificación de los Parámetros del Compilador}
+El uso de la sintaxis anterior responde a exigencias estrictas del perfilado de hardware:
+\begin{itemize}
+    \item \texttt{-g}: Genera los símbolos de depuración. Este parámetro es imperativo para que Intel Advisor logre mapear los cuellos de botella detectados en el ensamblador directamente hacia las líneas de código fuente en C++.
+    \item \texttt{-march=native}: Instruye al compilador a exprimir el conjunto de instrucciones máximo soportado por la arquitectura del procesador anfitrión (host), habilitando la emisión de instrucciones AVX2.
+    \item \texttt{-fno-inline}: Evita que el compilador expanda las funciones directamente en la rutina principal (\textit{main}). Esto aísla el kernel del operador Sobel, permitiendo medir exclusivamente su tiempo de ejecución sin ruido de E/S.
+    \item \texttt{-qopt-report}: Genera registros textuales de máxima verbosidad (\textit{max}) sobre la fase de vectorización (\textit{vec}), crucial para comprender por qué el compilador aprueba o rechaza paralelizar un ciclo.
+\end{itemize}
+
+\subsubsection{Flujo de Trabajo en Intel Advisor}
+Una vez generados los ejecutables, el análisis de rendimiento no consistió en una ejecución aislada, sino en una recolección bifásica utilizando la interfaz gráfica de \textit{Intel Advisor}:
+\begin{enumerate}
+    \item \textbf{Survey Analysis (Análisis de Inspección):} Se ejecutó inicialmente para medir los tiempos de ejecución base, detectar los bucles más pesados (hotspots) y generar el \textit{Instruction Mix} (mezcla dinámica de operaciones vectoriales y escalares).
+    \item \textbf{Trip Counts and FLOP Analysis (Análisis de Iteraciones y Operaciones):} Posteriormente, se instrumentó el binario para contar las operaciones matemáticas exactas de punto flotante y medir el tráfico del bus de datos. Esta fase es la responsable de inyectar los datos en el modelo \textbf{Roofline}, correlacionando finalmente el rendimiento alcanzado frente a las capacidades físicas del procesador y la memoria RAM DDR4.
+\end{enumerate}
+\FloatBarrier
+
+\subsection{Versiones implementadas}
+Para evaluar el impacto de las diferentes técnicas de paralelismo a nivel de datos, se desarrollaron cuatro variantes del kernel en C++.
+
+
+%bloque scalar
+
+\subsubsection{Versión Escalar (Línea Base)}
+Esta versión representa el algoritmo tradicional secuencial. Para garantizar que el compilador no aplicara ninguna optimización por debajo de la mesa, se compiló explícitamente con la bandera \texttt{-fno-vectorize}. Esta versión sirve como el punto de referencia (speedup de 1.0x) para las demás implementaciones.
+
+\subsubsection{Versión Escalar (Línea Base)}
+
+La versión escalar representa el algoritmo tradicional secuencial. Su propósito es establecer el punto de referencia de rendimiento ($1.00\times$) para evaluar las posteriores optimizaciones SIMD. En esta implementación, se omitió cualquier directiva de vectorización y se forzó al compilador a generar instrucciones escalares, procesando la imagen de entrada píxel por píxel.
+
+A continuación, se presenta la estructura del kernel utilizado:
+
+\begin{figure}[htb]
+    \centering
+    \begin{minipage}{\linewidth}
+    {\footnotesize
+    \begin{lstlisting}[mathescape=true]
+Entrada: 
+  Gx: Arreglo de gradientes horizontales
+  Gy: Arreglo de gradientes verticales
+  N:  Cantidad total de pixeles a procesar
+
+Salida: 
+  Mag: Arreglo con la magnitud resultante
+
+Procedimiento Operador_Sobel_Escalar(Gx, Gy, N, Mag):
+    // Procesamiento secuencial (un pixel por iteracion)
+    Para i desde 0 hasta N - 1 hacer:
+        Mag[i] $\leftarrow \sqrt{Gx[i]^2 + Gy[i]^2}$
+    Fin Para
+Fin Procedimiento
+    \end{lstlisting}
+    }
+    \end{minipage}
+    \caption{Pseudocódigo del kernel numérico para la versión escalar.}
+    \label{fig:codigo_escalar}
+\end{figure}
+
+Al ejecutar este kernel sobre el conjunto de datos de prueba, se obtuvo un tiempo de ejecución base en la terminal, validando simultáneamente la correcta generación de la imagen de salida.
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=\linewidth]{scalar01.png}
+    \caption{Salida en consola de la ejecución escalar, registrando un tiempo de 0.0273 segundos.}
+    \label{fig:terminal_escalar}
+\end{figure}
+
+Para comprender el comportamiento a nivel de hardware, se perfiló la ejecución utilizando \textit{Intel Advisor}. El modelo Roofline resultante (Figura \ref{fig:roofline_escalar}) revela que el punto de ejecución (marcado en rojo) se encuentra muy por debajo del rendimiento matemático máximo del procesador (\textit{Scalar Add Peak}). Además, se ubica en la región izquierda de la gráfica, chocando contra el límite del ancho de banda de la memoria DRAM (Memory-Bound).
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=\linewidth]{scalar02.png}
+    \caption{Modelo Roofline de la versión escalar. El rendimiento choca contra el límite de ancho de banda de la memoria.}
+    \label{fig:roofline_escalar}
+\end{figure}
+
+El análisis detallado de las métricas del programa confirma la ineficiencia del procesamiento secuencial para esta carga de trabajo. Como se documenta en la Figura \ref{fig:metricas_escalar}, el 94.9\% del tiempo de ejecución se gasta en código escalar, produciendo un rendimiento sumamente bajo de apenas 0.53 GFLOPS.
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=\linewidth]{scalar03.png}
+    \caption{Métricas generales del programa perfiladas en Intel Advisor.}
+    \label{fig:metricas_escalar}
+\end{figure}
+
+Finalmente, la inspección de la mezcla de instrucciones dinámicas (Figura \ref{fig:instrucciones_escalar}) corrobora empíricamente que el compilador respetó las restricciones de no-vectorización. La inmensa mayoría de las operaciones pertenecen a instrucciones de memoria (Memory) y procesamiento unario (Scalar/x86), sin aprovechamiento de los registros AVX2.
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=\linewidth]{scalar04.png}
+    \caption{Resumen de la mezcla de instrucciones (\textit{Instruction Mix}) ejecutadas por el CPU.}
+    \label{fig:instrucciones_escalar}
+\end{figure}
+\FloatBarrier
+
+% bloque automatica
+\subsubsection{Versión Automática}
+En esta variante, se delegó la responsabilidad de la vectorización completamente al compilador \texttt{icpx}. A nivel de código, la única intervención fue el uso del restrictor de memoria \texttt{\_\_restrict} en los punteros de los arreglos ($G_x$, $G_y$ y $Mag$). Esto le asegura al compilador que no existe solapamiento de memoria (aliasing), dándole luz verde para generar instrucciones SIMD al compilar con el nivel de optimización \texttt{-O3}.
+
+\subsubsection{Versión Automática}
+
+A nivel algorítmico, esta implementación es idéntica a la versión escalar. La optimización no se realiza inyectando código de bajo nivel, sino delegando la responsabilidad de la vectorización al compilador \texttt{icpx}. Para habilitar esto, se utilizó el nivel de optimización \texttt{-O3} y se agregaron calificadores de tipo \texttt{\_\_restrict} a los arreglos de entrada y salida, garantizando al compilador la ausencia de solapamiento de memoria (\textit{aliasing}).
+
+Al igual que en la versión anterior, la representación lógica del algoritmo se mantiene intacta:
+
+\begin{figure}[htb]
+    \centering
+    \begin{minipage}{\linewidth}
+    {\footnotesize
+    \begin{lstlisting}[mathescape=true]
+Entrada: 
+  Gx, Gy: Arreglos restrictos de gradientes (sin aliasing)
+  N: Cantidad total de pixeles a procesar
+
+Salida: 
+  Mag: Arreglo restricto con la magnitud resultante
+
+Procedimiento Operador_Sobel_Auto(Gx, Gy, N, Mag):
+    // El compilador decide como agrupar las iteraciones
+    Para i desde 0 hasta N - 1 hacer:
+        Mag[i] $\leftarrow \sqrt{Gx[i]^2 + Gy[i]^2}$
+    Fin Para
+Fin Procedimiento
+    \end{lstlisting}
+    }
+    \end{minipage}
+    \caption{Pseudocódigo del kernel numérico para la versión automática. La lógica es idéntica, pero el compilador asume la tarea de paralelizar.}
+    \label{fig:codigo_auto}
+\end{figure}
+
+Al ejecutar el binario, el tiempo reportado en consola (0.0277 segundos) fue prácticamente indistinguible de la línea base.
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=\linewidth]{auto01.png}
+    \caption{Salida en consola de la ejecución automática, registrando un tiempo de 0.0277 segundos.}
+    \label{fig:terminal_auto}
+\end{figure}
+
+Para comprender la falta de \textit{speedup}, se analizó el comportamiento del binario en Intel Advisor. Las métricas generales (Figura \ref{fig:metricas_auto}) revelan un comportamiento sumamente conservador por parte del compilador: el 92.5\% del tiempo de ejecución se consumió procesando código puramente escalar, logrando vectorizar únicamente una fracción minúscula del ciclo de trabajo (7.5\%).
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=\linewidth]{auto02.png}
+    \caption{Métricas del programa donde se evidencia que el compilador no logró vectorizar eficazmente el ciclo principal.}
+    \label{fig:metricas_auto}
+\end{figure}
+
+Esta ineficiencia se refleja claramente en el modelo Roofline (Figura \ref{fig:roofline_auto}). El punto de ejecución de esta versión ni siquiera logró superar el rendimiento del pico escalar (\textit{Scalar Add Peak} de 9.49 GFLOPS), estancándose en un rendimiento computacional muy pobre y chocando prematuramente contra el límite del ancho de banda de la memoria DRAM.
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=\linewidth]{auto04.png}
+    \caption{Modelo Roofline de la versión automática. El rendimiento se mantiene estancado por debajo del techo escalar.}
+    \label{fig:roofline_auto}
+\end{figure}
+
+Finalmente, el análisis de código (Figura \ref{fig:instrucciones_auto}) demuestra que las instrucciones SIMD pesadas (como AVX2) representan apenas un 1\% del total de la mezcla dinámica. Esto comprueba que, ante ciclos con operaciones matemáticas ligeras y accesos a memoria pesados como el del operador Sobel, el auto-vectorizador del compilador falla en emitir código óptimo, haciendo necesaria la intervención manual del programador.
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=\linewidth]{auto05.png}
+    \caption{Análisis de código e \textit{Instruction Mix}, confirmando la casi nula presencia de instrucciones vectoriales.}
+    \label{fig:instrucciones_auto}
+\end{figure}
+\FloatBarrier
+
+% bloque guiada
+\subsubsection{Versión Guiada (OpenMP)}
+Para forzar el paralelismo de manera estructurada sin escribir código dependiente de la arquitectura, se inyectaron directivas de OpenMP. Se colocó el pragma \texttt{\#pragma omp simd} justo antes del ciclo \texttt{for} principal. Esta técnica obliga al compilador a ignorar posibles dependencias de datos que él crea detectar y vectorizar el bucle obligatoriamente.
+
+\subsubsection{Versión Guiada (OpenMP)}
+
+La versión guiada tiene como objetivo superar el conservadurismo del auto-vectorizador del compilador. Para lograrlo, se intervino explícitamente el código fuente utilizando el estándar OpenMP. Al inyectar la directiva \texttt{\#pragma omp simd} justo antes del ciclo principal, se le ordena al compilador que asuma la total independencia de las iteraciones y genere instrucciones vectoriales de manera obligatoria, ignorando las dependencias de datos que él creyera detectar.
+
+La representación lógica de esta implementación destaca la presencia de la directiva de paralelización:
+
+\begin{figure}[htb]
+    \centering
+    \begin{minipage}{\linewidth}
+    {\footnotesize
+    \begin{lstlisting}[mathescape=true]
+Entrada: 
+  Gx, Gy: Arreglos restrictos de gradientes
+  N: Cantidad total de pixeles a procesar
+
+Salida: 
+  Mag: Arreglo restricto con la magnitud resultante
+
+Procedimiento Operador_Sobel_Guiado(Gx, Gy, N, Mag):
+    // Directiva OpenMP para forzar la vectorizacion SIMD
+    #pragma omp simd
+    Para i desde 0 hasta N - 1 hacer:
+        Mag[i] $\leftarrow \sqrt{Gx[i]^2 + Gy[i]^2}$
+    Fin Para
+Fin Procedimiento
+    \end{lstlisting}
+    }
+    \end{minipage}
+    \caption{Pseudocódigo del kernel numérico para la versión guiada, destacando el uso de la directiva de OpenMP.}
+    \label{fig:codigo_guiado}
+\end{figure}
+
+Al compilar (asegurando el soporte para OpenMP) y ejecutar el binario, el tiempo en consola fue de 0.0284 segundos. Lejos de presentar una mejora, el tiempo se mantuvo en el mismo rango de tolerancia que las versiones anteriores, reafirmando que el cuello de botella no reside en la emisión de instrucciones.
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=\linewidth]{guiada01.png}
+    \caption{Salida en consola de la ejecución guiada, registrando un tiempo de 0.0284 segundos.}
+    \label{fig:terminal_guiada}
+\end{figure}
+
+El reporte de métricas de Intel Advisor (Figura \ref{fig:metricas_guiada}) expone que, a pesar de la directiva explícita, el tiempo invertido en el ciclo vectorizado sigue siendo marginal (7.5\%). El procesador continúa destinando la abrumadora mayoría de sus ciclos de reloj (92.5\%) a gestionar código escalar, evidenciando que el pragma por sí solo no resuelve la inanición de datos de las unidades aritméticas.
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=\linewidth]{guiada02.png}
+    \caption{Métricas del programa donde se observa que el pragma de OpenMP no logró invertir la proporción de tiempo escalar frente al vectorizado.}
+    \label{fig:metricas_guiada}
+\end{figure}
+
+Esta limitante física queda plasmada empíricamente en el modelo Roofline (Figura \ref{fig:roofline_guiada}). El punto de rendimiento de la versión guiada se sitúa sobre la línea diagonal de la memoria DRAM, demostrando que el algoritmo choca contra el muro del ancho de banda antes de poder escalar hacia el techo del rendimiento matemático (\textit{Scalar Add Peak}).
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=\linewidth]{guiada04.png}
+    \caption{Modelo Roofline de la versión guiada, confirmando su naturaleza estrictamente \textit{Memory-Bound}.}
+    \label{fig:roofline_guiada}
+\end{figure}
+
+Finalmente, la analítica de código (Figura \ref{fig:instrucciones_guiada}) ratifica este diagnóstico. La penalización por acceder a la memoria principal es tan severa que las instrucciones de carga/almacenamiento y las operaciones escalares dominan el tiempo de ejecución. La arquitectura se ve imposibilitada de alimentar registros de 256 bits a la velocidad que requeriría un \textit{speedup} efectivo.
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=\linewidth]{guiada05.png}
+    \caption{Análisis de código de la versión guiada, dominado por el castigo de latencia en memoria.}
+    \label{fig:instrucciones_guiada}
+\end{figure}
+\FloatBarrier
+
+
+
+% bloque explicita
+\subsubsection{Versión Explícita (AVX2)}
+Esta versión representa el nivel de optimización más bajo y manual. Se importó la librería \texttt{<immintrin.h>} para utilizar directamente las funciones intrínsecas del procesador. Se procesaron bloques de 8 píxeles simultáneamente utilizando registros de 256 bits, mediante operaciones de carga (\texttt{\_mm256\_loadu\_ps}), multiplicación (\texttt{\_mm256\_mul\_ps}), suma (\texttt{\_mm256\_add\_ps}), raíz cuadrada (\texttt{\_mm256\_sqrt\_ps}) y almacenamiento (\texttt{\_mm256\_storeu\_ps}).
+
+\subsubsection{Versión Explícita (AVX2)}
+
+Esta última iteración representa el nivel más profundo de optimización manual. Para evadir por completo las decisiones conservadoras del compilador, se reprogramó el kernel utilizando funciones intrínsecas de Intel (\texttt{<immintrin.h>}). El ciclo for principal fue rediseñado con un incremento de 8 en 8, permitiendo cargar, multiplicar, sumar y extraer la raíz cuadrada de 8 valores de tipo \textit{float} (256 bits) de manera estrictamente simultánea utilizando los registros AVX2.
+
+La lógica del algoritmo modificado se describe en el siguiente pseudocódigo, donde se evidencia el empaquetado vectorial y el manejo de residuos escalares para tamaños de imagen que no sean múltiplos exactos de 8:
+
+\begin{figure}[htb]
+    \centering
+    \begin{minipage}{\linewidth}
+    {\footnotesize
+    \begin{lstlisting}[mathescape=true]
+Entrada: 
+  Gx, Gy: Arreglos de gradientes
+  N: Cantidad total de pixeles a procesar
+
+Salida: 
+  Mag: Arreglo con la magnitud resultante
+
+Procedimiento Operador_Sobel_Explicito(Gx, Gy, N, Mag):
+    i $\leftarrow$ 0
+    // Procesamiento vectorial SIMD (8 datos por ciclo)
+    Para i desde 0 hasta N - 8 con paso 8 hacer:
+        Vector_X $\leftarrow$ Cargar_8_Datos(Gx[i ... i+7])
+        Vector_Y $\leftarrow$ Cargar_8_Datos(Gy[i ... i+7])
+
+        Vector_X2 $\leftarrow$ Multiplicar_SIMD(Vector_X, Vector_X)
+        Vector_Y2 $\leftarrow$ Multiplicar_SIMD(Vector_Y, Vector_Y)
+        Suma_Vec $\leftarrow$ Sumar_SIMD(Vector_X2, Vector_Y2)
+
+        Res_Vec $\leftarrow \sqrt{Suma\_Vec}$  // Raiz cuadrada vectorial
+        Almacenar_8_Datos(Mag[i ... i+7], Res_Vec)
+    Fin Para
+
+    // Procesamiento escalar para pixeles residuales
+    Mientras i < N hacer:
+        Mag[i] $\leftarrow \sqrt{Gx[i]^2 + Gy[i]^2}$
+        i $\leftarrow$ i + 1
+    Fin Mientras
+Fin Procedimiento
+    \end{lstlisting}
+    }
+    \end{minipage}
+    \caption{Pseudocódigo del kernel explícito, ilustrando el procesamiento por bloques mediante registros AVX2.}
+    \label{fig:codigo_explicito}
+\end{figure}
+
+Al ejecutar el código, el tiempo reportado en consola (0.0274 segundos) fue prácticamente idéntico al de la línea base escalar. 
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=\linewidth]{explicit01.png}
+    \caption{Salida en consola de la ejecución con intrínsecas AVX2, registrando 0.0274 segundos.}
+    \label{fig:terminal_explicita}
+\end{figure}
+
+Para revelar por qué la inyección manual de instrucciones SIMD no redujo el tiempo de ejecución global, se consultaron las métricas de Intel Advisor (Figura \ref{fig:metricas_explicita}). Aunque el ciclo principal vectorizado se ejecuta con una rapidez extrema, el tiempo total del programa sigue dominado por las tareas no vectorizables de fondo y la gestión de memoria.
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=\linewidth]{explicit02.png}
+    \caption{Métricas generales del programa. El impacto del ciclo vectorizado se diluye en el tiempo global de la aplicación.}
+    \label{fig:metricas_explicita}
+\end{figure}
+
+El diagnóstico definitivo se consolida al analizar el modelo Roofline (Figura \ref{fig:roofline_explicita_final}). El punto de ejecución alcanzó un rendimiento matemático formidable de \textbf{68.76 GFLOPS}, superando por casi un factor de $7\times$ el límite máximo escalar (\textit{Scalar Add Peak} de 9.49 GFLOPS). Esto prueba de manera irrefutable que el hardware SIMD fue estimulado correctamente por el código explícito.
+
+No obstante, la herramienta reporta una intensidad aritmética crítica de tan solo \textbf{0.069 FLOP/Byte}. El punto de ejecución choca de frente contra la rampa diagonal etiquetada como \textit{DRAM Bandwidth (29.06 GB/sec)}. 
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=\linewidth]{explicit05.png}
+    \caption{Modelo Roofline de la versión explícita. El kernel alcanza casi 70 GFLOPS pero satura instantáneamente el ancho de banda de la memoria DRAM.}
+    \label{fig:roofline_explicita_final}
+\end{figure}
+
+Como conclusión de este perfilado, se demuestra empíricamente que el operador Sobel es un algoritmo estrictamente dominado por el ancho de banda de la memoria principal (\textit{Memory-Bound}). La velocidad de cómputo del procesador y las capacidades de las extensiones AVX2 superan holgadamente la capacidad física del bus de memoria para suministrar datos, impidiendo cualquier \textit{speedup} real a nivel de aplicación.
+
+Para contextualizar correctamente los resultados arrojados por el perfilador y entender los topes del modelo Roofline, es imperativo definir la arquitectura física anfitriona (\textit{host}). Las pruebas de estrés y validación se ejecutaron bajo el siguiente entorno de hardware y software:
+
+\begin{itemize}
+    \item \textbf{Procesador (CPU):} Arquitectura de 64 bits de alto rendimiento, dotada de múltiples núcleos físicos y soporte nativo para el conjunto de instrucciones de extensiones vectoriales avanzadas (AVX y AVX2). AMD Ryzen 9 5900X (24) @ 4.954G.
+    \item \textbf{Memoria Principal (RAM):} 128 GB de capacidad DDR4 3200Mhz total de almacenamiento volátil. Como se evidenció en los perfiles, el sistema opera con un ancho de banda pico real medido de entre $29.06$ y $31.48$ GB/s.
+    \item \textbf{Jerarquía de Memoria Caché:} Sistema de caché escalonado (L1, L2 y L3) integrado en el silicio para la mitigación de latencias, aunque insuficiente para retener la carga completa de la imagen.
+    \item \textbf{Sistema Operativo:} Entorno basado en núcleo UNIX/Linux Ubuntu 24.04.4 LTS x86 64, garantizando una mínima sobrecarga de procesos en segundo plano durante el perfilado.
+    \item \textbf{Suite de Desarrollo:} \textit{Intel oneAPI Base Toolkit} versión 2023, utilizando el compilador C++ de próxima generación (\texttt{icpx}) y el analizador de vectorización y techos de rendimiento (\textit{Intel Advisor}).
+\end{itemize}
+
+\FloatBarrier

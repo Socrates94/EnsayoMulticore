@@ -1,0 +1,50 @@
+Collection status has changed. 1
+Collection has been started.
+Collection has stopped. Application exit code:  0
+Finalizing results
+Finalizing the result
+Clearing the database
+The database has been cleared, elapsed time is 0.230 seconds.
+Loading raw data to the database
+Loading 'bandwidth_1771955608.hpc' file
+Loading 'systemcollector-40532-daniel-Gordo-friki.sc' file
+Loading '40532-40546.0.trace' file
+Loading 'tripcounts_40209_0.tcs' file
+Error: Cannot load data file `/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Scalar/Advisro-Scalar/e000/hs003/data.1/advixe-runtrc.txt' ().
+Updating precomputed scalar metrics
+Raw data has been loaded to the database, elapsed time is 0.059 seconds.
+Processing profile metrics and debug information
+Data transformations have been finished, elapsed time is 0.001 seconds.
+Setting data model parameters
+Resolving module symbols
+Resolving information for `scalar'
+Resolving information for `libc.so.6'
+Resolving information for `libstdc++.so.6'
+Warning: Cannot locate debugging information for file `/lib/x86_64-linux-gnu/libstdc++.so.6'.
+Resolving bottom user stack information
+Resolving thread name information
+Resolving call target names for dynamic code
+Symbol resolution has been finished, elapsed time is 0.405 seconds.
+Processing profile metrics and debug information
+Resolving FLOP information
+Calculating function call count
+Processing information for light dynamic instruction mix report
+Deferred data transformations have been finished, elapsed time is 0.020 seconds.
+Setting data model parameters
+Data model parameters have been set, elapsed time is 0.007 seconds.
+Precomputing frequently used data
+Precomputing frequently used data
+Updating precomputed scalar metrics
+Precomputing frequently used data has been finished, elapsed time is 0.015 seconds.
+Discarding redundant overtime data
+Saving the result
+Redundant overtime data has been discarded, elapsed time is 0.001 seconds.
+Raw collector data has been discarded, elapsed time is 0.000 seconds.
+Finalizing the result took 0.785 seconds.
+Preparing data for display of survey call tree
+Resolving module symbols
+Resolving information for dangling locations
+Resolving bottom user stack information
+Resolving thread name information
+Resolving call target names for dynamic code
+Precomputing frequently used data

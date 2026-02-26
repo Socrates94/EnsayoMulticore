@@ -1,0 +1,40 @@
+# callstacks file version: 8
+#    rowid	    parent	       rva	 loop	 system	                                function	binary	instance_start_rva	instance_size	instance_end_rva	finst_rowid	roi	is_inlined	jit_method_id	tripcounts_roi	flops_roi	cachesim_roi	data_transfer_roi	projection_roi
+         1	        -1	     10000	    0	      0	                                  _start	/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/explicit	10000	38	0	1	0	0	0	0	0	0	0	0
+         2	        -1	     10036	    0	      0	                                  _start	/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/explicit	10000	38	0	1	0	0	0	0	0	0	0	0
+         3	        36	    172682	    1	      1	[Loop at line 347 in __libc_start_main_impl]	/lib/x86_64-linux-gnu/libc.so.6	172651,172784	132,64	0	8	0	0	0	0	0	0	0	0
+         4	         3	    172489	    0	      1	                  __libc_start_call_main	/lib/x86_64-linux-gnu/libc.so.6	172368	164	0	10	0	0	0	0	0	0	0	0
+         5	         4	     13085	    0	      0	                                    main	/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/explicit	12704	1127	0	2	0	0	0	0	0	0	0	0
+         6	         5	     26234	    0	      0	                  __intel_avx_rep_memset	/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/explicit	25968	4295	0	3	0	0	0	0	0	0	0	0
+         7	         4	     13098	    0	      0	                                    main	/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/explicit	12704	1127	0	2	0	0	0	0	0	0	0	0
+         8	         7	     26234	    0	      0	                  __intel_avx_rep_memset	/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/explicit	25968	4295	0	3	0	0	0	0	0	0	0	0
+         9	         4	     13111	    0	      0	                                    main	/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/explicit	12704	1127	0	2	0	0	0	0	0	0	0	0
+        10	         9	     26234	    0	      0	                  __intel_avx_rep_memset	/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/explicit	25968	4295	0	3	0	0	0	0	0	0	0	0
+        11	        28	     13417	    1	      0	              [Loop at line 154 in main]	/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/explicit	13312	114	13426	4	0	0	0	0	0	0	0	0
+        12	        28	     13324	    1	      0	              [Loop at line 154 in main]	/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/explicit	13312	114	13426	4	0	0	0	0	0	0	0	0
+        13	        28	     13365	    1	      0	              [Loop at line 154 in main]	/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/explicit	13312	114	13426	4	0	0	0	0	0	0	0	0
+        14	         4	     13510	    0	      0	                                    main	/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/explicit	12704	1127	0	2	0	0	0	0	0	0	0	0
+        15	        32	     12202	    1	      0	[Loop at line 103 in sobel_explicit_avx2]	/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/explicit	12112	134	12246	6	0	0	0	0	0	0	0	0
+        16	        32	     12183	    1	      0	[Loop at line 103 in sobel_explicit_avx2]	/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/explicit	12112	134	12246	6	0	0	0	0	0	0	0	0
+        17	        32	     12177	    1	      0	[Loop at line 103 in sobel_explicit_avx2]	/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/explicit	12112	134	12246	6	0	0	0	0	0	0	0	0
+        18	         4	     13688	    0	      0	                                    main	/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/explicit	12704	1127	0	2	0	0	0	0	0	0	0	0
+        19	        18	    712217	    0	      1	                        __GI___libc_free	/lib/x86_64-linux-gnu/libc.so.6	712016	271	0	11	0	0	0	0	0	0	0	0
+        20	        19	   1203579	    0	      1	                                __munmap	/lib/x86_64-linux-gnu/libc.so.6	1203568	37	0	12	0	0	0	0	0	0	0	0
+        21	         4	     13696	    0	      0	                                    main	/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/explicit	12704	1127	0	2	0	0	0	0	0	0	0	0
+        22	        21	    712217	    0	      1	                        __GI___libc_free	/lib/x86_64-linux-gnu/libc.so.6	712016	271	0	11	0	0	0	0	0	0	0	0
+        23	        22	   1203579	    0	      1	                                __munmap	/lib/x86_64-linux-gnu/libc.so.6	1203568	37	0	12	0	0	0	0	0	0	0	0
+        24	         4	     13704	    0	      0	                                    main	/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/explicit	12704	1127	0	2	0	0	0	0	0	0	0	0
+        25	        24	    712217	    0	      1	                        __GI___libc_free	/lib/x86_64-linux-gnu/libc.so.6	712016	271	0	11	0	0	0	0	0	0	0	0
+        26	        25	   1203579	    0	      1	                                __munmap	/lib/x86_64-linux-gnu/libc.so.6	1203568	37	0	12	0	0	0	0	0	0	0	0
+        27	         4	     13264	    0	      0	                                    main	/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/explicit	12704	1127	0	2	0	0	0	0	0	0	0	0
+        28	        27	     13312	    1	      0	                [Loop at line 0 in main]	/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/explicit	13264	214	13478	5	0	0	0	0	0	0	0	0
+        29	         4	     13417	    0	      0	                                    main	/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/explicit	12704	1127	0	2	0	0	0	0	0	0	0	0
+        30	         4	     13324	    0	      0	                                    main	/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/explicit	12704	1127	0	2	0	0	0	0	0	0	0	0
+        31	         4	     13365	    0	      0	                                    main	/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/explicit	12704	1127	0	2	0	0	0	0	0	0	0	0
+        32	        14	     12112	    0	      0	                     sobel_explicit_avx2	/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/explicit	12064	633	0	7	0	0	0	0	0	0	0	0
+        33	        14	     12202	    0	      0	                     sobel_explicit_avx2	/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/explicit	12064	633	0	7	0	0	0	0	0	0	0	0
+        34	        14	     12183	    0	      0	                     sobel_explicit_avx2	/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/explicit	12064	633	0	7	0	0	0	0	0	0	0	0
+        35	        14	     12177	    0	      0	                     sobel_explicit_avx2	/home/daniel/Escritorio/Maestria segundo semestre/Multicore/Ensayo multicore/Explicita/explicit	12064	633	0	7	0	0	0	0	0	0	0	0
+        36	         2	    172651	    0	      1	                  __libc_start_main_impl	/lib/x86_64-linux-gnu/libc.so.6	172544	334	0	9	0	0	0	0	0	0	0	0
+        37	         2	    172682	    0	      1	                  __libc_start_main_impl	/lib/x86_64-linux-gnu/libc.so.6	172544	334	0	9	0	0	0	0	0	0	0	0
+        38	        -1	         0	    0	      0	                [Unknown stack frame(s)]	n/a	0	0	0	14	0	0	0	0	0	0	0	0

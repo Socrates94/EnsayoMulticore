@@ -1,0 +1,16 @@
+%!TEX root = main.tex
+\section{Introducción}
+
+\subsection{Contexto del procesamiento de imágenes}
+\PARstart{L}{a} detección de bordes es una operación fundamental en el procesamiento de imágenes digitales y la visión artificial. Esta técnica transforma una matriz de píxeles en información estructural vital, resaltando formas y contornos al identificar los cambios más bruscos de intensidad luminosa en la imagen original.
+
+\subsection{Importancia del rendimiento en el procesamiento de imágenes}
+En aplicaciones del mundo real, la velocidad computacional es un factor crítico. Tareas como el preprocesamiento de imágenes médicas o los sistemas de percepción en vehículos autónomos requieren respuestas en tiempo real. El procesamiento escalar tradicional suele ser insuficiente ante grandes volúmenes de datos, por lo que resulta indispensable aprovechar las capacidades de paralelismo a nivel de datos que ofrecen los procesadores modernos.
+
+\subsection{Contexto del procesamiento de imágenes}
+\PARstart{L}{a} detección de bordes es una operación fundamental en el procesamiento de imágenes digitales y la visión artificial. Esta técnica transforma una matriz de píxeles en información estructural vital, resaltando formas y contornos al identificar los cambios más bruscos de intensidad luminosa en la imagen original. Algoritmos clásicos, como el operador Sobel, son ampliamente utilizados por su simplicidad matemática y su eficacia para calcular la magnitud del gradiente bidimensional.
+
+\subsection{Importancia del rendimiento en el procesamiento de imágenes}
+En aplicaciones del mundo real, la velocidad computacional es un factor crítico. Tareas como el preprocesamiento de imágenes médicas o los sistemas de percepción en vehículos autónomos requieren respuestas en tiempo real. El procesamiento escalar tradicional suele ser insuficiente ante grandes volúmenes de datos, por lo que resulta indispensable aprovechar las capacidades de paralelismo a nivel de datos que ofrecen los procesadores modernos. 
+
+En este artículo se analiza el impacto de aplicar diferentes técnicas de vectorización SIMD sobre un kernel de detección de bordes, con el objetivo de evaluar empíricamente los beneficios y las limitantes del hardware al procesar cargas de trabajo intensivas.

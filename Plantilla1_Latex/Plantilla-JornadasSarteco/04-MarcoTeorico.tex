@@ -1,0 +1,21 @@
+%!TEX root = main.tex
+\section{Marco teórico}
+
+\subsection{Vectorización SIMD}
+La vectorización se basa en el modelo SIMD (Single Instruction, Multiple Data), que permite a un procesador ejecutar una misma operación matemática sobre un conjunto de datos simultáneamente. En este proyecto se utilizan las extensiones AVX2 (Advanced Vector Extensions), cuyos registros de 256 bits tienen la capacidad de empaquetar y procesar 8 datos de tipo \textit{float} de forma paralela.
+
+\subsection{Herramienta de Perfilado Intel Advisor}
+Para la evaluación de rendimiento se utiliza \textit{Intel Advisor}, una herramienta avanzada de diseño y análisis de vectorización. Su característica más destacada es el modelo \textbf{Roofline}, el cual correlaciona de manera visual el rendimiento máximo (medido en GFLOPS) con la intensidad aritmética del algoritmo y los límites físicos del ancho de banda de la memoria del sistema.
+
+\subsection{El Operador Sobel y Máscaras de Convolución}
+El operador Sobel es un filtro discreto de diferenciación computacional que calcula una aproximación del gradiente de la función de intensidad de la imagen. Se basa en la convolución de la matriz de píxeles original con dos filtros (máscaras) de $3 \times 3$, uno diseñado para detectar cambios de luminosidad horizontales ($G_x$) y otro para cambios verticales ($G_y$). 
+
+Dichas matrices de convolución están definidas matemáticamente de la siguiente manera:
+
+\begin{equation}
+G_x = \begin{bmatrix} -1 & 0 & +1 \\ -2 & 0 & +2 \\ -1 & 0 & +1 \end{bmatrix} * A 
+\quad \text{y} \quad 
+G_y = \begin{bmatrix} +1 & +2 & +1 \\ 0 & 0 & 0 \\ -1 & -2 & -1 \end{bmatrix} * A
+\end{equation}
+
+Donde $A$ representa la región de $3 \times 3$ píxeles de la imagen de origen. Al aplicar estas máscaras, el algoritmo extrae la magnitud del gradiente, la cual representa la "fuerza" o nitidez del borde en cada píxel. La combinación de ambos gradientes ortogonales mediante la norma euclidiana constituye el núcleo iterativo (\textit{kernel}) que fue perfilado a nivel de hardware en esta investigación.

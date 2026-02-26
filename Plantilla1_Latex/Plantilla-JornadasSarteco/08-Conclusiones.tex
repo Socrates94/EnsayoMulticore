@@ -1,0 +1,9 @@
+%!TEX root = main.tex
+\section{Conclusiones}
+Este análisis experimental demuestra que la optimización de código mediante vectorización explícita AVX2 es una herramienta poderosa, pero su efectividad está condicionada por la arquitectura de memoria. En kernels iterativos de baja intensidad aritmética como el operador Sobel, el cuello de botella físico impide alcanzar el speedup teórico del paralelismo SIMD. Para obtener mejoras significativas de rendimiento en este tipo de procesamiento de imágenes, las futuras investigaciones deberán priorizar técnicas que incrementen la localidad de datos y optimicen el uso de la memoria caché.
+
+Este análisis experimental demuestra que la optimización de código mediante vectorización explícita AVX2 es una herramienta poderosa, pero su efectividad está estrictamente condicionada por la arquitectura de memoria. 
+
+En kernels iterativos de baja intensidad aritmética como el operador Sobel, el cuello de botella físico impide alcanzar el \textit{speedup} teórico del paralelismo SIMD. Se comprobó que la limitante no es la capacidad total de la memoria principal (RAM), sino su ancho de banda; el bus de la tecnología DDR4 del equipo de pruebas alcanzó su límite físico de transferencia ($\sim$29 GB/s), saturando la alimentación de datos hacia el procesador. 
+
+Para obtener mejoras significativas de rendimiento en este tipo de procesamiento de imágenes, no basta con acelerar las unidades aritmético-lógicas (ALUs), sino que las futuras investigaciones deberán priorizar técnicas que incrementen la localidad de datos (como \textit{tiling} o \textit{loop blocking}) para optimizar el uso de la memoria caché L1/L2 y evitar el costoso viaje a la RAM.

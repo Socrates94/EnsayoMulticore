@@ -1,6 +1,4 @@
-%%%%% Fichero de ejemplo LaTeX que ilustra el uso de la Hoja de Estilo %%%%%%
-%%%%% Jornadas.cls para Jornadas Sarteco
-
+%%%%% Fichero principal main.tex %%%%%%
 \documentclass[twocolumn,twoside]{Jornadas}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
@@ -14,21 +12,12 @@
 \usepackage{caption}
 \captionsetup{font=footnotesize}
 \usepackage[caption=false,font=footnotesize]{subfig}
-%\setlength{\marginparwidth}{2cm}
-%\usepackage{todonotes}
 \usepackage{placeins}
 \usepackage{hyperref}
 \usepackage{url}
+\usepackage{amsmath} % <-- Añadido para que compile tu ecuación matemática
 
-% -*- Ajustes LaTeX en relación a las figuras -*-
-\setcounter{topnumber}{10}     % Max. numero de figs. on top
-\setcounter{bottomnumber}{10}  % Max. numero de figs. abajo
-\setcounter{totalnumber}{10}   % Max. numero de figs. por pagina
-\renewcommand{\topfraction}{1} % Max. fraccion de pagina ocupada por figs.
-\renewcommand{\bottomfraction}{1}
-\renewcommand{\textfraction}{0}  % Min. fraccion de pagina ocupada por texto
-\renewcommand{\floatpagefraction}{1} % Max. espacio de pagina solo con figs.
-
+% Configuración de colores y bloques de código de tu plantilla original
 \definecolor{gray97}{gray}{.97}
 \definecolor{gray75}{gray}{.75}
 \definecolor{gray45}{gray}{.45}
@@ -37,7 +26,6 @@
      inputencoding=utf8,
      extendedchars=true,
      backgroundcolor=\color{gray97},
-     %
      stringstyle=\ttfamily,
      showstringspaces = false,
      basicstyle=\scriptsize\ttfamily,
@@ -51,71 +39,51 @@
      numberstyle=\tiny,
      numberfirstline = false,
      firstnumber=auto,
-     breaklines=true,
-     %
      escapeinside={(*@}{@*)},
      literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ñ}{{\~n}}1
-   }
+}
 
-\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
-    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
-\newtheorem{theorem}{Teorema}
-
-\hyphenation{pa-ra-le-lis-mo pro-cee-dings}
-
-%Directorios en los que se buscan las figuras
-\graphicspath{{.}{./Figuras/}}
+% AQUÍ CONFIGURAMOS TU CARPETA DE IMÁGENES
+\graphicspath{{.}{./img/}} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 
-\title{Usando la hoja de estilo Jornadas.cls}
+\title{Análisis de Rendimiento y Vectorización SIMD de un Kernel Numérico para Detección de Bordes basado en el Operador Sobel}
 
 \author{%
-     Jesús González%
-     \thanks{Dpto. de Informática, Universidad de Tombuctú, e-mail: {\tt gonzales@tbt.edu.}},
-     Ángela Sánchez$^2$ y Moisés Salmerón%
-     \thanks{Dpto. de Arquitectura de Computadores, Universidad de Pernambuco, 
-     e-mail: {\tt \{sanchez,salmeron\}@per.edu.}}
+     José Daniel Flores Morales%
+     \thanks{Benemérita Universidad Autónoma de Puebla, Maestría en Sistemas Distribuidos, Facultad de Ciencias de la Computación. Correo: {\tt fm225470536@alm.buap.mx}}
 }
 
 \maketitle
-% Oculta las cabeceras y los números de página.
-% Ambos elementos se añadirán durante la edición de las actas completas.
 \markboth{}{}
 \pagestyle{empty} 
-\thispagestyle{empty} % Oculta el número de la primera página
+\thispagestyle{empty} 
 
 \begin{abstract}
-Este artículo explica cómo usar la hoja de estilo \LaTeX\ para las
-Jornadas Sarteco.
+La detección de bordes es una etapa crítica en el preprocesamiento de imágenes médicas y navegación autónoma, exigiendo alta eficiencia computacional. Este artículo evalúa el impacto de la vectorización SIMD en el rendimiento de un kernel numérico basado en el operador Sobel. Se desarrollaron cuatro implementaciones en C++: escalar, vectorización automática, guiada (OpenMP) y explícita utilizando intrínsecas AVX2. Las pruebas se ejecutaron sobre un espacio de datos masivo equivalente a 800 iteraciones de una imagen de 256x256 píxeles. El perfilado en Intel Advisor confirmó la generación de instrucciones vectoriales de 256 bits. Sin embargo, el análisis del modelo Roofline revela que el speedup frente a la versión escalar es marginal. Se concluye que el cálculo posee baja intensidad aritmética, clasificando al kernel como Memory-Bound, limitando el rendimiento al ancho de banda de la memoria principal.
 \end{abstract}
 
 \begin{keywords}
-Hoja de estilo, \LaTeX, Jornadas Sarteco.
+Vectorización SIMD, AVX2, Auto-vectorización, OpenMP, Operador Sobel, Intel Advisor, Modelo Roofline, Memory-Bound.
 \end{keywords}
 
-%Añade los ficheros que necesites:
+% ARCHIVOS MODULARES (Se omiten el 01 y 02 porque ya están arriba)
 
-\input{01-Intro.tex}
-\input{02-Background.tex}
-\input{03-Method.tex}
-\input{04-Experimental.tex}
-\input{05-Conclusions.tex}
+\input{02-Resumen.tex}
+\input{03-Introduccion.tex}
+\input{04-MarcoTeorico.tex}
+\input{05-Metodologia.tex}
+\input{06-Resultados.tex}
+\input{07-Discusion.tex}
+\input{08-Conclusiones.tex}
 
-
-\section*{Agradecimientos}
-
-Añadir en esta sección no numerada los posibles agradecimientos a proyectos,
-instituciones o personas. Por ejemplo: El presente trabajo ha sido financiado
-mediante  el proyecto xxxx-xxxxx-xxx. 
-
-%Comenta la línea \nocite para que sólo se incluyan en las referencias
-%las entradas que esté referenciadas en el texto con \cite{}
+% REFERENCIAS APA 7 (Deben ir ANTES del end)
 \nocite{*}
-\bibliographystyle{Jornadas}
+\bibliographystyle{apalike}
 \bibliography{biblio}
 
 \end{document}
-

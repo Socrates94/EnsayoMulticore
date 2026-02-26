@@ -1,0 +1,8 @@
+%!TEX root = main.tex
+\section{Discusión}
+
+\subsection{Comparación entre vectorizaciones}
+A nivel visual, todas las versiones procesaron correctamente la imagen PGM, generando los contornos esperados. Sin embargo, a pesar de que la versión explícita utiliza eficientemente los registros de 256 bits, el \textit{speedup} frente a la versión escalar es estadísticamente nulo (apenas un 1.3\% de mejora).
+
+\subsection{Interpretación de los resultados}
+La gráfica de la Figura \ref{fig:roofline} aclara la raíz de este comportamiento: los puntos de ejecución chocan contra el "techo" de las líneas diagonales, no contra el techo horizontal. El cálculo de la magnitud con el operador Sobel posee una \textbf{baja intensidad aritmética}; el procesador requiere leer 8 bytes y escribir 4 bytes por cada cálculo matemático simple. Como resultado, el bus de memoria RAM se satura antes de que las unidades aritméticas (ALUs) puedan aprovechar el empaquetado SIMD, clasificando este problema como estrictamente \textbf{Memory-Bound}.
