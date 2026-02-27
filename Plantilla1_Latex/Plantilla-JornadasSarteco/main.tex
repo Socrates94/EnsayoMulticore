@@ -49,6 +49,8 @@
 \graphicspath{{.}{./img/}} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+%1. Título, Autores, Afiliación, datos de contacto
 \begin{document}
 
 \title{Análisis de Rendimiento y Vectorización SIMD de un Kernel Numérico para Detección de Bordes basado en el Operador Sobel}
@@ -63,15 +65,9 @@
 \pagestyle{empty} 
 \thispagestyle{empty} 
 
-\begin{abstract}
-La detección de bordes es una etapa crítica en el preprocesamiento de imágenes médicas y navegación autónoma, exigiendo alta eficiencia computacional. Este artículo evalúa el impacto de la vectorización SIMD en el rendimiento de un kernel numérico basado en el operador Sobel. Se desarrollaron cuatro implementaciones en C++: escalar, vectorización automática, guiada (OpenMP) y explícita utilizando intrínsecas AVX2. Las pruebas se ejecutaron sobre un espacio de datos masivo equivalente a 800 iteraciones de una imagen de 256x256 píxeles. El perfilado en Intel Advisor confirmó la generación de instrucciones vectoriales de 256 bits. Sin embargo, el análisis del modelo Roofline revela que el speedup frente a la versión escalar es marginal. Se concluye que el cálculo posee baja intensidad aritmética, clasificando al kernel como Memory-Bound, limitando el rendimiento al ancho de banda de la memoria principal.
-\end{abstract}
 
-\begin{keywords}
-Vectorización SIMD, AVX2, Auto-vectorización, OpenMP, Operador Sobel, Intel Advisor, Modelo Roofline, Memory-Bound.
-\end{keywords}
 
-% ARCHIVOS MODULARES (Se omiten el 01 y 02 porque ya están arriba)
+% ARCHIVOS MODULARES     
 
 \input{02-Resumen.tex}
 \input{03-Introduccion.tex}
@@ -80,6 +76,8 @@ Vectorización SIMD, AVX2, Auto-vectorización, OpenMP, Operador Sobel, Intel Ad
 \input{06-Resultados.tex}
 \input{07-Discusion.tex}
 \input{08-Conclusiones.tex}
+
+%9. Referencias esta en biblio.bib
 
 % REFERENCIAS APA 7 (Deben ir ANTES del end)
 \nocite{*}

@@ -1,13 +1,7 @@
 %!TEX root = main.tex
-\section{Marco teórico}
+\section{Marco Teórico}
 
-\subsection{Vectorización SIMD}
-La vectorización se basa en el modelo SIMD (Single Instruction, Multiple Data), que permite a un procesador ejecutar una misma operación matemática sobre un conjunto de datos simultáneamente. En este proyecto se utilizan las extensiones AVX2 (Advanced Vector Extensions), cuyos registros de 256 bits tienen la capacidad de empaquetar y procesar 8 datos de tipo \textit{float} de forma paralela.
-
-\subsection{Herramienta de Perfilado Intel Advisor}
-Para la evaluación de rendimiento se utiliza \textit{Intel Advisor}, una herramienta avanzada de diseño y análisis de vectorización. Su característica más destacada es el modelo \textbf{Roofline}, el cual correlaciona de manera visual el rendimiento máximo (medido en GFLOPS) con la intensidad aritmética del algoritmo y los límites físicos del ancho de banda de la memoria del sistema.
-
-\subsection{El Operador Sobel y Máscaras de Convolución}
+\subsection{El Operador Sobel y Detección de Bordes}
 El operador Sobel es un filtro discreto de diferenciación computacional que calcula una aproximación del gradiente de la función de intensidad de la imagen. Se basa en la convolución de la matriz de píxeles original con dos filtros (máscaras) de $3 \times 3$, uno diseñado para detectar cambios de luminosidad horizontales ($G_x$) y otro para cambios verticales ($G_y$). 
 
 Dichas matrices de convolución están definidas matemáticamente de la siguiente manera:
@@ -18,4 +12,42 @@ G_x = \begin{bmatrix} -1 & 0 & +1 \\ -2 & 0 & +2 \\ -1 & 0 & +1 \end{bmatrix} * 
 G_y = \begin{bmatrix} +1 & +2 & +1 \\ 0 & 0 & 0 \\ -1 & -2 & -1 \end{bmatrix} * A
 \end{equation}
 
-Donde $A$ representa la región de $3 \times 3$ píxeles de la imagen de origen. Al aplicar estas máscaras, el algoritmo extrae la magnitud del gradiente, la cual representa la "fuerza" o nitidez del borde en cada píxel. La combinación de ambos gradientes ortogonales mediante la norma euclidiana constituye el núcleo iterativo (\textit{kernel}) que fue perfilado a nivel de hardware en esta investigación.
+Donde $A$ representa la región de $3 \times 3$ píxeles de la imagen de origen. Al aplicar estas máscaras, el algoritmo extrae la magnitud del gradiente, la cual representa la "fuerza" o nitidez del borde en cada píxel mediante la siguiente ecuación:
+\begin{equation}
+    G[i] = \sqrt{G_{x}[i]^{2} + G_{y}[i]^{2}}
+\end{equation}
+
+A diferencia de otros filtros como Canny, que introducen dependencias de datos que impiden la vectorización, Sobel permite el procesamiento independiente de cada píxel, haciéndolo ideal para la optimización SIMD. La combinación de ambos gradientes ortogonales constituye el núcleo iterativo (\textit{kernel}) evaluado en esta investigación.
+
+\subsection{Vectorización SIMD y AVX2}
+El paralelismo a nivel de datos se fundamenta en el modelo SIMD (\textit{Single Instruction, Multiple Data}), el cual permite a un procesador ejecutar una misma operación matemática sobre un conjunto de datos simultáneamente. En este proyecto, el paralelismo se evaluó utilizando las extensiones vectoriales avanzadas \textbf{AVX2} (\textit{Advanced Vector Extensions}). 
+
+Estos registros permiten empaquetar y procesar 8 datos de tipo \textit{float} (256 bits en total) de forma estrictamente simultánea en un solo ciclo de reloj. En la Figura \ref{fig:codigoAuto} se ilustra la implementación algorítmica del kernel base sobre el cual se aplicaron las directivas de vectorización.
+
+\begin{figure}[htb]
+    \centering
+    \begin{minipage}{\linewidth}
+    {\footnotesize
+    \begin{lstlisting}[mathescape=true]
+Entrada: 
+  Gx: Arreglo de gradientes horizontales
+  Gy: Arreglo de gradientes verticales
+  N:  Total de pixeles a procesar
+
+Salida: 
+  Mag: Arreglo con la magnitud resultante
+
+Procedimiento Calculo_Magnitud(Gx, Gy, N, Mag):
+    Para i desde 0 hasta N - 1 hacer:
+        Mag[i] $\leftarrow \sqrt{Gx[i]^2 + Gy[i]^2}$
+    Fin Para
+Fin Procedimiento
+    \end{lstlisting}
+    }
+    \end{minipage}
+    \caption{Pseudocódigo del kernel numérico utilizado para el cálculo de la magnitud del gradiente.}
+    \label{fig:codigoAuto}
+\end{figure}
+
+\subsection{Perfilado y Modelo Roofline}
+Para el análisis profundo de rendimiento se empleó la herramienta \textit{Intel Advisor}. Esta plataforma no solo mide tiempos de ejecución, sino que permite generar el modelo \textbf{Roofline}, una representación visual avanzada que correlaciona empíricamente el rendimiento máximo computacional alcanzado (medido en GFLOPS) con la intensidad aritmética del algoritmo (operaciones de punto flotante por byte transferido) e ilustra los límites físicos de ancho de banda de la jerarquía de memoria del sistema anfitrión.

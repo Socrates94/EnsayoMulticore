@@ -1,43 +1,9 @@
 %!TEX root = main.tex
-\section{Marco Teórico}
 
-\subsection{El Kernel Numérico y el Operador Sobel}
-En el contexto de este trabajo, el \textbf{kernel numérico} se refiere a la región crítica de código responsable de aplicar el operador de detección de bordes. Específicamente, representa el ciclo computacionalmente intensivo que calcula la magnitud del gradiente para cada píxel mediante la siguiente ecuación:
-\begin{equation}
-    G[i] = \sqrt{G_{x}[i]^{2} + G_{y}[i]^{2}}
-\end{equation}
+\begin{abstract}
+La detección de bordes es una etapa crítica en el preprocesamiento de imágenes médicas y navegación autónoma, exigiendo alta eficiencia computacional. Este artículo evalúa el impacto de la vectorización SIMD en el rendimiento de un kernel numérico basado en el operador Sobel. Se desarrollaron cuatro implementaciones en C++: escalar, vectorización automática, guiada (OpenMP) y explícita utilizando intrínsecas AVX2. Las pruebas se ejecutaron sobre un espacio de datos masivo equivalente a 800 iteraciones de una imagen de $256 \times 256$ píxeles. El perfilado en Intel Advisor confirmó la correcta emisión de instrucciones vectoriales de 256 bits; sin embargo, el análisis del modelo Roofline revela que el speedup frente a la versión escalar es estadísticamente nulo. Se concluye empíricamente que el cálculo posee una intensidad aritmética críticamente baja, clasificando al kernel como estrictamente \textit{Memory-Bound} y limitando su rendimiento al ancho de banda físico de la memoria principal.
+\end{abstract}
 
-Para obtener los gradientes direccionales ($G_x$ y $G_y$), se utilizó el \textbf{operador Sobel}, el cual emplea máscaras de convolución de $3\times3$. A diferencia del operador Canny, que introduce dependencias de datos que impiden la vectorización, Sobel permite el procesamiento independiente de cada píxel, haciéndolo ideal para la optimización SIMD.
-
-\subsection{Vectorización SIMD y AVX2}
-El paralelismo se evaluó utilizando las extensiones vectoriales avanzadas \textbf{AVX2} (Advanced Vector Extensions). Estos registros permiten empaquetar y procesar 8 datos de tipo \textit{float} (256 bits en total) de forma estrictamente simultánea en un solo ciclo de reloj. 
-
-En la Figura \ref{fig:codigoAuto} se ilustra la implementación del kernel base sobre el cual se aplicaron las directivas de vectorización.
-
-\begin{figure}[htb]
-    \centering
-    \begin{minipage}{\linewidth}
-    {\footnotesize
-    \begin{lstlisting}[mathescape=true]
-Entrada: 
-  Gx: Arreglo de gradientes horizontales
-  Gy: Arreglo de gradientes verticales
-  N:  Total de pixeles a procesar
-
-Salida: 
-  Mag: Arreglo con la magnitud resultante
-
-Procedimiento Calculo_Magnitud(Gx, Gy, N, Mag):
-    Para i desde 0 hasta N - 1 hacer:
-        Mag[i] $\leftarrow \sqrt{Gx[i]^2 + Gy[i]^2}$
-    Fin Para
-Fin Procedimiento
-    \end{lstlisting}
-    }
-    \end{minipage}
-    \caption{Pseudocódigo del kernel numérico utilizado para el cálculo de la magnitud del gradiente.}
-    \label{fig:codigoAuto}
-\end{figure}
-
-\subsection{Perfilado y Modelo Roofline}
-Para el análisis de rendimiento se empleó la herramienta \textit{Intel Advisor}. Esta plataforma permite generar el modelo \textbf{Roofline}, una representación visual que correlaciona el rendimiento máximo teórico (medido en GFLOPS) con la intensidad aritmética del algoritmo (operaciones de punto flotante por byte transferido) y los límites de ancho de banda de la jerarquía de memoria del sistema.
+\begin{keywords}
+Vectorización SIMD, AVX2, Auto-vectorización, OpenMP, Operador Sobel, Intel Advisor, Modelo Roofline, Memory-Bound.
+\end{keywords}

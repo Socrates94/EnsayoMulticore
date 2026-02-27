@@ -18,15 +18,55 @@ Explícita (AVX2) & 0.0274 & 0.99x \\\hline
 \end{center}
 \end{table}
 
-\subsection{GFLOPS}
-El reporte de Intel Advisor confirmó la correcta generación de instrucciones SIMD para las versiones optimizadas. Sin embargo, la métrica de GFLOPS (Giga Flops Per Second) se mantuvo notablemente baja, lejos del pico máximo teórico de la arquitectura AMD utilizada.
+\subsection{Rendimiento Computacional (GFLOPS)}
+El reporte de Intel Advisor confirmó la correcta generación de instrucciones SIMD para las versiones optimizadas. Sin embargo, la métrica de GFLOPS (\textit{Giga Flops Per Second}) varió drásticamente dependiendo de la intervención manual del programador frente a las decisiones autónomas del compilador.
+
+A partir del análisis en el modelo Roofline, se extrajeron los rendimientos mostrados en la Tabla \ref{tab:gflops}, tomando como línea base el techo teórico escalar del procesador (\textit{Scalar Add Peak} de 9.49 GFLOPS).
+
+\begin{table}[htb]
+\caption{Comparativa de Rendimiento Computacional (GFLOPS) reportado.}
+\label{tab:gflops}
+\begin{center}
+\begin{tabular}{|l||c|p{3.2cm}|}\hline
+Versión & GFLOPS & vs. Pico Escalar (9.49) \\\hline\hline
+Escalar & $\sim$6.80 & Por debajo del límite \\\hline
+Automática & $\sim$9.49 & En el límite del pico \\\hline
+Guiada & $\sim$7.00 & Por debajo del límite \\\hline
+Explícita & 68.76 & Por encima del límite \\\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+Como evidencia la tabla, las versiones Escalar, Automática y Guiada no superaron los 9.49 GFLOPS, desaprovechando las capacidades SIMD. En contraste, la versión Explícita estimuló correctamente el hardware alcanzando 68.76 GFLOPS (un aumento de $\sim 7\times$), aunque este beneficio matemático fue mitigado por el cuello de botella en la memoria RAM.
 
 \subsection{Gráficas Roofline de Advisor}
-La siguiente figura ilustra el análisis visual del rendimiento del kernel bajo el modelo Roofline.
+Las siguientes figuras ilustran el análisis visual de rendimiento. Al expandir las gráficas, se evidencia la transición desde un rendimiento escalar estancado hasta la saturación del bus de memoria mediante instrucciones vectoriales explícitas.
 
-\begin{figure}[htb]
+\begin{figure*}[htpb]
     \centering
-    %\includegraphics[width=\linewidth]{TU_IMAGEN_ROOFLINE.png}
-    \caption{Modelo Roofline generado por Intel Advisor para la versión vectorizada.}
-    \label{fig:roofline}
-\end{figure}
+    \includegraphics[width=\textwidth]{scalar02.png}
+    \caption{Modelo Roofline generado por Intel Advisor para la versión Escalar. El punto de ejecución (rojo) indica un rendimiento extremadamente bajo, limitado desde un inicio por el ancho de banda de la memoria (Memory-Bound).}
+    \label{fig:roofline_escalar_res}
+\end{figure*}
+
+\begin{figure*}[htpb]
+    \centering
+    \includegraphics[width=\textwidth]{auto04.png}
+    \caption{Modelo Roofline generado para la versión Automática. Se observa un estancamiento del rendimiento computacional, manteniéndose por debajo del pico escalar teórico del procesador debido al conservadurismo del compilador.}
+    \label{fig:roofline_auto_res}
+\end{figure*}
+
+\begin{figure*}[htpb]
+    \centering
+    \includegraphics[width=\textwidth]{guiada04.png}
+    \caption{Modelo Roofline generado para la versión Guiada con OpenMP. A pesar de forzar la vectorización mediante pragmas, el rendimiento sigue estrictamente acotado por la rampa diagonal que representa el ancho de banda de la DRAM.}
+    \label{fig:roofline_guiada_res}
+\end{figure*}
+
+\begin{figure*}[htpb]
+    \centering
+    \includegraphics[width=\textwidth]{explicit05.png}
+    \caption{Modelo Roofline generado para la versión Explícita (AVX2). El kernel alcanza un pico matemático cercano a los 70 GFLOPS, confirmando el éxito de la inyección de intrínsecas, pero satura de manera inmediata el bus de memoria (29.06 GB/s).}
+    \label{fig:roofline_explicita_res}
+\end{figure*}
+\FloatBarrier
