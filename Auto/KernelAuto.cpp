@@ -1,6 +1,5 @@
 // Compilación: icpx -g -O3 -march=native -fno-inline -qopt-report=max -qopt-report-phase=vec -o auto KernelAuto.cpp
 
-
 #include <iostream>
 #include <vector>
 #include <chrono>
@@ -96,7 +95,7 @@ void calcular_gradientes_sobel(const vector<float>& img, float* Gx, float* Gy, i
     }
 }
 
-// EL KERNEL A EVALUAR (Vectorización Automática)
+// EL KERNEL A EVALUAR
 void sobel_auto(const float* __restrict Gx, const float* __restrict Gy, float* __restrict Mag, int N) {
     
     for (int i = 0; i < N; i++) {

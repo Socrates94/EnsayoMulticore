@@ -2,7 +2,7 @@
 \section{Resultados}
 
 \subsection{Tiempos de ejecución}
-Se midió el tiempo exclusivo del kernel numérico (ignorando I/O de archivos). Como se observa en la Tabla \ref{tab:tiempos}, los tiempos son casi idénticos en todas las versiones.
+Se midió el tiempo exclusivo del kernel numérico. Como se observa en la Tabla \ref{tab:tiempos}, los tiempos son casi idénticos en todas las versiones.
 
 \begin{table}[htb]
 \caption{Comparativa de Tiempos de Ejecución reales del Kernel.}
@@ -19,7 +19,6 @@ Explícita (AVX2) & 0.0274 & 0.99x \\\hline
 \end{table}
 
 \subsection{Rendimiento Computacional (GFLOPS)}
-El reporte de Intel Advisor confirmó la correcta generación de instrucciones SIMD para las versiones optimizadas. Sin embargo, la métrica de GFLOPS (\textit{Giga Flops Per Second}) varió drásticamente dependiendo de la intervención manual del programador frente a las decisiones autónomas del compilador.
 
 A partir del análisis en el modelo Roofline, se extrajeron los rendimientos mostrados en la Tabla \ref{tab:gflops}, tomando como línea base el techo teórico escalar del procesador (\textit{Scalar Add Peak} de 9.49 GFLOPS).
 

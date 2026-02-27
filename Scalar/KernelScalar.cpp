@@ -98,7 +98,7 @@ void calcular_gradientes_sobel(const vector<float>& img, float* Gx, float* Gy, i
     }
 }
 
-// KERNEL ESCALAR BASE (El cálculo a perfilar)
+// KERNEL ESCALAR BASE
 void sobel_scalar(const float* __restrict Gx, const float* __restrict Gy, float* __restrict Mag, int N) {
     
     for (int i = 0; i < N; i++) {

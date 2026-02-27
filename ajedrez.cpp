@@ -8,7 +8,7 @@ using namespace std;
 int main() {
     int width = 256;
     int height = 256;
-    int square_size = 32; // Tamaño de los cuadros (puedes cambiarlo)
+    int square_size = 32; 
     
     ofstream file("ajedrez.pgm");
     if (!file.is_open()) return -1;

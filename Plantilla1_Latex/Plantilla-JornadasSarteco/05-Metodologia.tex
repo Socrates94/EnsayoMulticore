@@ -11,7 +11,7 @@ El kernel numérico objetivo de este estudio calcula la magnitud del gradiente d
 Para contextualizar correctamente los resultados arrojados por el perfilador y entender los topes del modelo Roofline, es imperativo definir la arquitectura física anfitriona (\textit{host}). Las pruebas de estrés y validación se ejecutaron bajo el siguiente entorno de hardware y software, procesando una imagen PGM sintética de $256 \times 256$ píxeles, replicada en memoria 800 veces para generar una carga de trabajo robusta:
 
 \begin{itemize}
-    \item \textbf{Procesador (CPU):} AMD Ryzen 9 5900X (24 hilos lógicos a 4.95 GHz). Arquitectura de 64 bits de alto rendimiento con soporte nativo para el conjunto de instrucciones de extensiones vectoriales avanzadas (AVX y AVX2).
+    \item \textbf{Procesador (CPU):} AMD Ryzen 9 5950X (32 hilos lógicos a 4.95 GHz). Arquitectura de 64 bits de alto rendimiento con soporte nativo para el conjunto de instrucciones de extensiones vectoriales avanzadas (AVX y AVX2).
     \item \textbf{Memoria Principal (RAM):} 128 GB de capacidad total de almacenamiento volátil, implementando tecnología DDR4 a 3200 MHz. Como se evidenció en los perfiles, el sistema opera con un ancho de banda pico real medido de entre $29.06$ y $31.48$ GB/s.
     \item \textbf{Jerarquía de Memoria Caché:} Sistema de caché escalonado (L1, L2 y L3) integrado en el silicio para la mitigación de latencias, aunque insuficiente para retener la carga completa de la imagen.
     \item \textbf{Sistema Operativo:} Entorno basado en núcleo UNIX/Linux (Ubuntu 24.04.4 LTS x86\_64), garantizando una mínima sobrecarga de procesos en segundo plano durante el perfilado.

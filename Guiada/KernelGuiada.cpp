@@ -73,7 +73,7 @@ void escribir_pgm(const string& filename, float* buffer, int w, int h) {
 
 }
 
-// Preprocesamiento para obtener gradientes reales usando máscaras de Sobel (No se mide su tiempo)
+// Preprocesamiento para obtener gradientes reales usando máscaras de Sobel
 void calcular_gradientes_sobel(const vector<float>& img, float* Gx, float* Gy, int w, int h) {
 
     int mx[3][3] = {{-1, 0, 1}, {-2, 0, 2}, {-1, 0, 1}};
